@@ -1,3 +1,4 @@
+
   // Dữ liệu mẫu cho đồ thị (tạm thời) 
   const yArray = [1,2,4,5,6,4,8,9,10,9,10,9,8,10]; //điểm đường đồ thị 
 
