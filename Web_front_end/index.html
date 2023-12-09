@@ -22,6 +22,8 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Gilroy:wght@500&display=swap"
     />
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
   </head>
   <body>
     <div class="dashboard-2">
@@ -152,173 +154,25 @@
         </div>
       </div>
       <div class="dashboard1">Dashboard</div>
-      <div class="chart-1">
-        <div class="line-chart">
-          <div class="title-parent">
-            <div class="title">
-              <div class="product">Nhiệt độ</div>
-              <div class="rightelements">
-                <div class="legend">
-                  <div class="legend-1">
-                    <div class="legend-1-child"></div>
-                    <div class="offline-orders">Offline orders</div>
-                  </div>
-                  <div class="legend-1">
-                    <div class="legend-2-child"></div>
-                    <div class="offline-orders">Online orders</div>
-                  </div>
-                  <div class="filter">
-                    <div class="filter1">
-                      <div class="offline-orders">Monthly</div>
-                      <img
-                        class="chevron-down-icon1"
-                        alt=""
-                        src="./public/chevrondown1.svg"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="table">
-              <div class="table1">
-                <div class="line-parent">
-                  <div class="line">
-                    <div class="div4">100</div>
-                    <div class="line-child"></div>
-                  </div>
-                  <div class="line">
-                    <div class="div5">80</div>
-                    <img class="line-item" alt="" src="./public/line-9.svg" />
-                  </div>
-                  <div class="line">
-                    <div class="div5">60</div>
-                    <div class="line-child"></div>
-                  </div>
-                  <div class="line">
-                    <div class="div5">40</div>
-                    <div class="line-child"></div>
-                  </div>
-                  <div class="line">
-                    <div class="div5">20</div>
-                    <div class="line-child"></div>
-                  </div>
-                  <div class="line">
-                    <div class="div5">0</div>
-                    <div class="line-child"></div>
-                  </div>
-                </div>
-                <div class="month">
-                  <div class="offline-orders">Jan</div>
-                  <div class="offline-orders">Feb</div>
-                  <div class="offline-orders">Mar</div>
-                  <div class="offline-orders">Apr</div>
-                  <div class="offline-orders">May</div>
-                  <div class="offline-orders">Jun</div>
-                  <div class="offline-orders">Jul</div>
-                </div>
-              </div>
-              <img class="bg-icon" alt="" src="./public/bg.svg" />
 
-              <img class="chart-1-icon" alt="" src="./public/chart1.svg" />
-
-              <div class="table-child"></div>
-              <div class="info">
-                <div class="info1">
-                  <div class="aug-2022-parent">
-                    <div class="offline-orders">15 Aug 2022</div>
-                    <div class="div10">$59,492.10</div>
-                  </div>
-                </div>
-                <img class="pin-icon" alt="" src="./public/pin.svg" />
-              </div>
-            </div>
+      <!-- Đồ thị nhiệt độ CHART 1 -->
+      <div class="Chart1">
+          <!-- Thêm dropdown list -->
+          <div class="dropdown-container">
+            <select id="timeRange">
+              <option value="24h">24 giờ qua</option>
+              <option value="7d">7 ngày qua</option>
+              <option value="30d">30 ngày qua</option>
+            </select>
           </div>
-        </div>
-      </div>
-      <div class="chart-2">
-        <div class="chart-21">
-          <div class="line-chart1">
-            <div class="line">
-              <div class="product">Độ ẩm</div>
-              <div class="rightelements">
-                <div class="legend">
-                  <div class="legend-1">
-                    <div class="legend-1-child"></div>
-                    <div class="offline-orders">Offline orders</div>
-                  </div>
-                  <div class="legend-1">
-                    <div class="legend-2-child"></div>
-                    <div class="offline-orders">Online orders</div>
-                  </div>
-                  <div class="filter">
-                    <div class="filter1">
-                      <div class="offline-orders">Monthly</div>
-                      <img
-                        class="chevron-down-icon1"
-                        alt=""
-                        src="./public/chevrondown2.svg"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="table2">
-              <div class="table1">
-                <div class="line-parent">
-                  <div class="line">
-                    <div class="div4">100</div>
-                    <div class="line-child"></div>
-                  </div>
-                  <div class="line">
-                    <div class="div5">80</div>
-                    <img class="line-item" alt="" src="./public/line-91.svg" />
-                  </div>
-                  <div class="line">
-                    <div class="div5">60</div>
-                    <div class="line-child"></div>
-                  </div>
-                  <div class="line">
-                    <div class="div5">40</div>
-                    <div class="line-child"></div>
-                  </div>
-                  <div class="line">
-                    <div class="div5">20</div>
-                    <div class="line-child"></div>
-                  </div>
-                  <div class="line">
-                    <div class="div5">0</div>
-                    <div class="line-child"></div>
-                  </div>
-                </div>
-                <div class="month">
-                  <div class="offline-orders">Jan</div>
-                  <div class="offline-orders">Feb</div>
-                  <div class="offline-orders">Mar</div>
-                  <div class="offline-orders">Apr</div>
-                  <div class="offline-orders">May</div>
-                  <div class="offline-orders">Jun</div>
-                  <div class="offline-orders">Jul</div>
-                </div>
-              </div>
-              <img class="chart-2-icon" alt="" src="./public/chart2.svg" />
-
-              <div class="table-child"></div>
-              <div class="info">
-                <div class="info1">
-                  <div class="aug-2022-parent">
-                    <div class="offline-orders">15 Aug 2022</div>
-                    <div class="div10">$59,492.10</div>
-                  </div>
-                </div>
-                <img class="pin-icon" alt="" src="./public/pin1.svg" />
-              </div>
-              <img class="bg-icon" alt="" src="./public/bg1.svg" />
-            </div>
+          <!-- Thêm đồ thị sử dụng Plotly -->
+          <div id="myPlot" style="height:95%; width:130%; max-width:900px"></div>
+          <div class="chart-container">
+            <canvas id="temperatureChart"></canvas>
           </div>
-        </div>
       </div>
+      <!-- END Đồ thị nhiệt độ CHART 1 -->
+
       <div class="right-side">
         <div class="image-garden">
           <div class="rounded-rectangle-parent">
@@ -328,13 +182,11 @@
               alt=""
               src="./public/image-garden@2x.png"
             />
-
             <img
               class="edit-button-icon"
               alt=""
               src="./public/edit-button@2x.png"
             />
-
             <div class="title-image">Hình ảnh</div>
           </div>
         </div>
@@ -402,5 +254,7 @@
         </div>
       </div>
     </div>
+
+    <script src="ChartScript.js"></script>
   </body>
 </html>
