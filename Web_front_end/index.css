@@ -1082,11 +1082,8 @@
 }
 .right-side {
   position: absolute;
-  top: 25px;
-  left: 1173px;
-  width: 307px;
-  height: 830px;
-  font-size: var(--font-size-4xl);
+ top: 40px;
+ right: 330px;
 }
 .dashboard-2 {
   position: relative;
@@ -1098,4 +1095,19 @@
   font-size: var(--font-size-xl);
   color: var(--primary);
   font-family: var(--font-roboto);
+}
+.dropdown-container{
+  z-index: 1;
+  position: relative;
+  top: 50px;
+  margin-left: 10%;
+  width: 17%;
+}
+/* ĐỒ THỊ NHIỆT ĐỘ  */
+.Chart1 {
+  position: relative;
+  width: 40%;
+  height: 400px;
+  margin-top: 350px;
+  margin-left: 320px;
 }
