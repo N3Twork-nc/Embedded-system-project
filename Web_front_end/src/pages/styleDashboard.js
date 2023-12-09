@@ -22,7 +22,7 @@ export const Dropdownicon = styled.img`
   max-height: 100%;
   &:hover {
   position: absolute;
-  background-color: var(--gray);
+  box-shadow: 0 0 5px 1px var(--main);
 }
 `;
 export const Dropdownlist = styled.div`
@@ -178,6 +178,7 @@ export const Soilboxcontainer = styled.div`
   right: 0%;
   bottom: 0%;
   left: 79.41%;
+  box-shadow: var(--shadow);
 `;
 export const Airtext = styled.div`
   position: absolute;
@@ -230,6 +231,7 @@ export const Airboxcontainer = styled.div`
   right: 25.7%;
   bottom: 0%;
   left: 51.9%;
+  box-shadow: var(--shadow);
 `;
 export const Lighttext = styled.div`
   position: absolute;
@@ -282,6 +284,7 @@ export const Lightboxcontainer = styled.div`
   right: 53.23%;
   bottom: 0%;
   left: 26.19%;
+  box-shadow: var(--shadow);
 `;
 export const Temptext = styled.div`
   position: absolute;
@@ -334,6 +337,7 @@ export const Tempboxcontainer = styled.div`
   right: 78.84%;
   bottom: 0%;
   left: 0%;
+  box-shadow: var(--shadow);
 `;
 export const Mainparametercontainer = styled.div`
   position: absolute;
@@ -794,7 +798,7 @@ export const Navlist = styled.div`
   position: absolute;
   height: 1.99%;
   width: 70.44%;
-  top: 59.72%;
+  top: 90%;
   right: 10.95%;
   bottom: 38.3%;
   left: 18.61%;
@@ -828,7 +832,7 @@ export const Navlist1 = styled.div`
   position: absolute;
   height: 1.99%;
   width: 70.44%;
-  top: 63.77%;
+  top: 85%;
   right: 9.49%;
   bottom: 34.24%;
   left: 20.07%;
@@ -859,18 +863,7 @@ export const Dashboard2 = styled.div`
   font-weight: 600;
   display: inline-block;
 `;
-export const Boxaddgarden = styled.div`
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  top: 0%;
-  right: 0%;
-  bottom: 0%;
-  left: 0%;
-  border-radius: var(--br-3xs);
-  background-color: var(--white);
-  box-shadow: 0px 20px 70px rgba(86, 89, 146, 0.1);
-`;
+
 export const Icongarden = styled.img`
   position: absolute;
   height: 100%;
@@ -883,12 +876,15 @@ export const Icongarden = styled.img`
   overflow: hidden;
   max-height: 100%;
 `;
-export const TextAddGarden = styled.b`
+export const TextAddGarden = styled.div`
   position: absolute;
-  width: 37.09%;
-  top: 24%;
-  left: 39.64%;
+  top: 16%;
+  font-size: 23px;
+  width: 47.92%;
+  left: 35%;
+  font-weight: 600;
   display: inline-block;
+  color: var(--primary);
 `;
 export const Iconaddgarden = styled.img`
   position: absolute;
@@ -906,7 +902,7 @@ export const Iconaddgarden = styled.img`
 /* CSS khi trỏ chuột vào */
 &:hover {
   position: absolute;
-  background-color: #B4E0A0;
+  box-shadow: 0 0 5px 1px var(--main);
 }
 `;
 export const Addgardenitems = styled.div`
@@ -917,6 +913,8 @@ export const Addgardenitems = styled.div`
   right: 12.97%;
   bottom: 14.47%;
   left: 7.78%;
+  align-items: center;
+  justify-content: center;
 
 `;
 export const AddgardenContainer = styled.div`
@@ -959,22 +957,21 @@ export const ImageGardenIcon = styled.img`
 `;
 export const ButtoneditIcon = styled.img`
   position: absolute;
-  height: 59.26%;
-  width: 8.85%;
-  top: 18.52%;
+  top: 10%;
   right: -0.02%;
-  bottom: 22.22%;
-  left: 91.17%;
-  max-width: 100%;
+  max-width: 90%;
   overflow: hidden;
-  max-height: 100%;
+  max-height: 90%;
   object-fit: cover;
+  &:hover {
+  position: absolute;
+  box-shadow: 0 0 5px 1px var(--main);
+}
 `;
 export const Imagetitle = styled.div`
   position: absolute;
   width: 47.92%;
-  top: 0%;
-  left: 0%;
+  left: 35%;
   font-weight: 600;
   display: inline-block;
 `;
@@ -995,6 +992,9 @@ export const Imagecontainer = styled.div`
   right: 1%;
   bottom: 59%;
   left: 79.69%;
+  box-shadow: 0px 20px 70px rgba(86, 89, 146, 0.1);
+  background-color: var(--white);
+  border-radius: 15px;
 `;
 export const Controltitle = styled.div`
   position: absolute;
@@ -1016,15 +1016,6 @@ export const Boxwater = styled.div`
   background-color: var(--white);
   box-shadow: 0px 8px 24px rgba(12, 147, 89, 0.13);
 `;
-export const On = styled.div`
-  position: absolute;
-  width: 30.36%;
-  top: 56.54%;
-  left: 15.42%;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-`;
 export const ButtonlightChild = styled.img`
   position: absolute;
   height: 99.33%;
@@ -1040,30 +1031,30 @@ export const ButtonlightChild = styled.img`
 `;
 export const ButtonlightItem = styled.div`
   position: absolute;
-  height: 74.5%;
-  width: 42.86%;
-  top: 12.42%;
-  right: 7.14%;
+  height: 80%;
+  width: 46%;
+  top: 10%;
+  left: ${(props) => (props.shifted ? 'calc(2% + 30px)' : '2%')};
   bottom: 13.09%;
-  left: 50%;
   border-radius: 50%;
-  background-color: var(--color-seagreen);
+  background-color: ${(props) => (props.shifted ? 'var(--color-seagreen)' : 'var(--primary)')};
+  transition: all 0.3s ease; /* Thêm hiệu ứng di chuyển */
 `;
+
 export const Buttonlight = styled.div`
   position: absolute;
-  height: 51.78%;
-  width: 86.99%;
-  top: 48.22%;
-  right: 11.79%;
-  bottom: 0%;
-  left: 1.22%;
+  width: 70%;
+  top: 55%;
+  bottom: -10%;
+  left: 15%;
+  border: 1px solid var(--primary);
+  border-radius: 20px;
+  cursor: pointer; /* Hiển thị cursor nhấp chuột */
 `;
 export const Textlight = styled.div`
   position: absolute;
-  width: 100%;
-  top: 0%;
-  left: 0%;
-  font-size: var(--font-size-mini);
+  width: 150%;
+  font-size: var(--font-size-xl);
   line-height: 150%;
   font-family: var(--font-roboto);
   color: var(--primary);
@@ -1080,15 +1071,7 @@ export const Boxlighttext = styled.div`
 `;
 export const Lighticon = styled.img`
   position: absolute;
-  height: 99.74%;
-  width: 28.38%;
-  top: 0%;
-  right: 71.62%;
-  bottom: 0.26%;
-  left: 0%;
-  max-width: 100%;
-  overflow: hidden;
-  max-height: 100%;
+  right: 100px;
 `;
 export const Lightcontainer = styled.div`
   position: absolute;
@@ -1111,15 +1094,6 @@ export const Turnlightcontainer = styled.div`
   color: var(--color-seagreen);
   font-family: var(--font-gilroy);
 `;
-export const On1 = styled.div`
-  position: absolute;
-  width: 30.36%;
-  top: 56.54%;
-  left: 18.23%;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-`;
 export const Boxwatertext = styled.div`
   position: absolute;
   height: 95.65%;
@@ -1131,15 +1105,7 @@ export const Boxwatertext = styled.div`
 `;
 export const Wateringicon = styled.img`
   position: absolute;
-  height: 99.67%;
-  width: 28.69%;
-  top: 0.33%;
-  right: 71.31%;
-  bottom: 0%;
-  left: 0%;
-  max-width: 100%;
-  overflow: hidden;
-  max-height: 100%;
+  width: 45%;
 `;
 export const Wateringcontainer = styled.div`
   position: absolute;
@@ -1169,7 +1135,7 @@ export const Adddevicetext = styled.div`
   left: 17.44%;
   display: inline-block;
 `;
-export const Iconadddevice = styled.div`
+export const Iconadddevice = styled.img`
   position: absolute;
   height: 100%;
   width: 100%;
@@ -1177,8 +1143,7 @@ export const Iconadddevice = styled.div`
   background-color: var(--white);
   &:hover {
   position: absolute;
-  width: 200%;
-  color: var(--gray);
+  box-shadow: 0 0 5px 1px var(--main);
 }
 
 `;
@@ -1212,6 +1177,8 @@ export const Boxadddevices = styled.div`
   right: 11.82%;
   bottom: 76.16%;
   left: 13.83%;
+  border: 1px solid var(--color-seagreen);
+  border-radius: var(--br-3xs);
 `;
 export const Controllercontainer = styled.div`
   position: absolute;
@@ -1221,6 +1188,9 @@ export const Controllercontainer = styled.div`
   right: 1%;
   bottom: 5.08%;
   left: 79.69%;
+  background-color: var(--white);
+  border-radius: 15px;
+  box-shadow: 0px 20px 70px rgba(86, 89, 146, 0.1);
 `;
 export const DashboardRoot = styled.div`
   position: relative;
