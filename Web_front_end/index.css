@@ -218,7 +218,7 @@
 .div1,
 .soil-hum1 {
   position: absolute;
-  top: 10px;
+  top: 9px;
   left: 39px;
   letter-spacing: 0.02em;
   font-weight: 500;
@@ -241,7 +241,8 @@
 .vector-icon {
   top: 0;
   left: 0;
-  width: 43.62px;
+  width: 43px;
+  height: 43px;
   object-fit: cover;
 }
 .item-container {
@@ -269,27 +270,27 @@
 .air-hum-text,
 .div2 {
   position: absolute;
-  top: 10px;
+  top: 11px;
   left: 21.32px;
   letter-spacing: 0.02em;
   font-weight: 500;
   display: inline-block;
-  width: 188.26px;
+  width: 200px;
   height: 20.75px;
 }
 .div2 {
-  top: 0;
+  top: 9px;
   left: 55.35px;
   font-weight: 600;
   width: 91.74px;
   height: 40.2px;
 }
-.vector-icon1 {
+.icon-do-am-kk {
   position: absolute;
   top: 0.29px;
   left: 0;
-  width: 47.45px;
-  height: 53.04px;
+  width: 43px;
+  height: 43px;
   object-fit: cover;
 }
 .item-container1 {
@@ -308,7 +309,8 @@
   left: 413.68px;
   width: 209.58px;
   height: 118px;
-  font-size: var(--font-size-lg);
+  align-items: center;
+
 }
 .nh-sng {
   margin: 0;
@@ -340,7 +342,7 @@
   color: var(--color-midnightblue);
   font-family: var(--footnote);
 }
-.box-nhit,
+.box-nhit, .box-nhit2,
 .light {
   position: absolute;
   top: 0;
@@ -352,17 +354,34 @@
   left: 0;
   border-radius: var(--br-3xs);
   background-color: var(--white);
-  width: 168.65px;
+  width: 180px;
 }
+.box-nhit2 {
+  left: 0;
+  border-radius: var(--br-3xs);
+  background-color: var(--white);
+  width: 190px;
+}
+
 .c,
 .nhit {
   position: absolute;
-  top: 6px;
-  left: 36px;
+  top: 9px;
+  left: 40px;
   letter-spacing: 0.02em;
   font-weight: 500;
   display: inline-block;
-  width: 119.15px;
+  width: auto;
+  height: 20.75px;
+}
+.nhit2 {
+  position: absolute;
+  top: 9px;
+  left: 17px;
+  letter-spacing: 0.02em;
+  font-weight: 500;
+  display: inline-block;
+  width: auto;
   height: 20.75px;
 }
 .c {
@@ -380,7 +399,8 @@
 .vector-icon3 {
   top: 0;
   left: 0;
-  width: 44.82px;
+  width: 43px;
+  height: 43px;
   object-fit: cover;
 }
 .item-container3 {
@@ -1027,8 +1047,8 @@
 }
 .group-inner,
 .text-add-garden {
-  width: 36.89px;
-  height: 38.68px;
+  width: 40px;
+  height: 40px;
 }
 .text-add-garden {
   top: 10px;
