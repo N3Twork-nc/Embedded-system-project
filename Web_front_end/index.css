@@ -1,8 +1,9 @@
 .taskbar {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   background-color: #056c09;
+  overflow-y: auto;
   width: 274px;
   height: 1209px;
 }
