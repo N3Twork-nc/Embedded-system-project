@@ -6,6 +6,7 @@ import {
   useLocation,
 } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
+import Login from "./pages/Login";
 
 function App() {
   const action = useNavigationType();
@@ -45,7 +46,7 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/" element={<Dashboard />} />
+      <Route path="/" element={<Login />} />
     </Routes>
   );
 }
