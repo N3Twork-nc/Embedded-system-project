@@ -5,6 +5,7 @@ import {
   useNavigationType,
   useLocation,
 } from "react-router-dom";
+import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import AllGarden from "./pages/All Garden/allGarden";
 import * as y from "./api/garden";
@@ -48,8 +49,9 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/" element={<Dashboard />} />
+      <Route path="/" element={<Login />} />
       <Route path="/all-gardens" element={<AllGarden />} />
+      <Route path="/dashboard" element={<Dashboard />} />
     </Routes>
   );
 }
