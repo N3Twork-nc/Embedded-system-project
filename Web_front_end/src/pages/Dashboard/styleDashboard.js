@@ -27,15 +27,15 @@ export const Dropdownicon = styled.img`
 `;
 export const Dropdownlist = styled.div`
   position: absolute;
-  width: 100%;
+  width: 80%;
   top: 13px;
-  left: 20%;
+  left: 0%;
   font-weight: 600;
   display: inline-block;
 `;
 export const Gardennamecontainer = styled.div`
   position: absolute;
-  width: calc(100% - 830px);
+  width: calc(100% - 810px);
   top: 10px;
   left: 830px;
   box-shadow: 0px 20px 70px rgba(86, 89, 146, 0.1);

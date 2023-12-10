@@ -1,7 +1,9 @@
 import React, {useState, useEffect } from 'react';
 import * as styles from './styleDashboard';
 import Plotly from 'plotly.js-dist';
-import { fonts } from '../global';
+import { fonts } from '../../global.js'
+import { format } from 'date-fns';
+import { Link } from 'react-router-dom';
 
 const Dashboard = () => {
   const [tempYArray, setTempYArray] = useState([1, 2, 4, 5, 6, 4, 8, 9, 10, 9, 10, 9, 8, 10, 12, 8, 6, 5, 8, 7, 7, 7, 7, 9, 10, 9, 10, 9, 8, 10, 12]);
@@ -12,6 +14,20 @@ const Dashboard = () => {
   const [selectedHumidRange, setSelectedHumidRange] = useState('24h');
   const [selectedLightRange, setSelectedLightRange] = useState('24h');
   const [selectedSoilRange, setSelectedSoilRange] = useState('24h');
+  const [selectedGarden, setSelectedGarden] = useState('Vườn cà chua');
+  const [currentHour, setCurrentHour] = useState('');
+
+  const gardenOptions = [
+    'Vườn xà lách',
+    'Vườn cà chua',
+    'Vườn rau mầm',
+    // Thêm các tên vườn khác vào đây
+  ];
+
+  const handleGardenChange = (event) => {
+    setSelectedGarden(event.target.value);
+    // Thực hiện các thay đổi khi vườn được chọn
+  };
 
   useEffect(() => {
     const tempXData = generateXData(selectedTempRange);
@@ -164,6 +180,17 @@ const saveData = () => {
     setShiftedWater(!shiftedWater); // Đảo ngược giá trị mỗi khi được nhấp
   };
 
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      const currentDateTime = new Date();
+      const formattedHour = format(currentDateTime, "hh:mm a"); // Format thời gian theo 12 giờ và AM/PM
+      setCurrentHour(formattedHour);
+    }, 1000); // Cập nhật thời gian mỗi giây
+
+    return () => clearInterval(intervalId);
+  }, []);
+// Đổi trang
+
   return (
     <styles.DashboardRoot>
     {/* Header */}
@@ -212,12 +239,29 @@ const saveData = () => {
       <styles.Maininforcontainer>
         {/* Chọn vườn */}
         <styles.Gardennamecontainer>
-          <styles.Dropdownicon alt="" src="/chevron-right.svg" />
-          <styles.Dropdownlist style={{cursor: 'default'}}>Vườn xà lách</styles.Dropdownlist>
+                <select
+                  value={selectedGarden}
+                  onChange={handleGardenChange}
+                  style={{
+                    padding: '11px',
+                    color: '#056C09',
+                    marginLeft: '25px',
+                    fontSize: '23px',
+                    border: '1px solid #fff',
+                    borderRadius: '5px',
+                    fontWeight: 'bold',
+                  }}
+                >
+                  {gardenOptions.map((garden, index) => (
+                    <option key={index} value={garden}>
+                      {garden}
+                    </option>
+                  ))} 
+                </select>
         </styles.Gardennamecontainer>
 
         <styles.Timecontainer>
-          <styles.Hour>10:00 PM</styles.Hour>
+           <styles.Hour>{currentHour}</styles.Hour>
         </styles.Timecontainer>
 
       {/* Info người dùng */}
@@ -285,7 +329,9 @@ const saveData = () => {
           <styles.AboutUs style={{ cursor: 'default'}} >About us</styles.AboutUs>
         </styles.ItemAboutUs>
         <styles.ItemAllGardens>
-          <styles.TtCKhu style={{ cursor: 'default'}}>Tất cả khu vườn</styles.TtCKhu>
+          <Link to="/all-gardens">
+            <styles.TtCKhu style={{ cursor: 'default', color: '#FFF'}}>Tất cả khu vườn</styles.TtCKhu>
+          </Link>
           <styles.IconAllGardern alt="" src="/icon-all-gardern.svg" />
         </styles.ItemAllGardens>
         <styles.ItemDashboard>
@@ -319,7 +365,7 @@ const saveData = () => {
 
       {/* Hình ảnh */}
       <styles.Imagecontainer>
-        <styles.ImageGardenIcon alt="" src="/image-garden@2x.png" />
+        <styles.ImageGardenIcon alt="" src="/tomato.png" />
         <styles.Headerimagecontainer>
           <styles.ButtoneditIcon alt="" src="/edit.png" />
           <styles.Imagetitle>Hình ảnh</styles.Imagetitle>
