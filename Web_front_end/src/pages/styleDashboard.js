@@ -27,21 +27,19 @@ export const Dropdownicon = styled.img`
 `;
 export const Dropdownlist = styled.div`
   position: absolute;
-  width: 52.14%;
-  top: 24.53%;
-  left: 24.12%;
+  width: 100%;
+  top: 13px;
+  left: 20%;
   font-weight: 600;
   display: inline-block;
 `;
 export const Gardennamecontainer = styled.div`
   position: absolute;
-  height: 71.62%;
-  width: 24.31%;
-  top: 13.51%;
-  right: 0%;
-  bottom: 14.86%;
-  left: 75.69%;
+  width: calc(100% - 830px);
+  top: 10px;
+  left: 830px;
   box-shadow: 0px 20px 70px rgba(86, 89, 146, 0.1);
+  height: 53px;
   color: var(--primary);
   background-color: var(--white);
   border-radius:15px;
@@ -119,7 +117,7 @@ export const Userinfocontainer = styled.div`
 `;
 export const Maininforcontainer = styled.div`
 position: absolute;
-  width: calc(100% - 743.29px);
+  width: calc(100% - 770px);
   top: 130px;
   right: 418.86px;
   left: 324.44px;
@@ -340,11 +338,11 @@ export const Tempboxcontainer = styled.div`
 `;
 export const Mainparametercontainer = styled.div`
 position: absolute;
-  width: calc(100% - 746.31px);
+  width: calc(100% - 770px);
   top: 230px;
   right: 418.86px;
   left: 327.45px;
-  height: 130px;
+  height: 140px;
   font-size: var(--font-size-11xl);
   color: var(--color-midnightblue);
   font-family: var(--footnote);
@@ -909,10 +907,10 @@ export const Addgardenitems = styled.div`
 `;
 export const AddgardenContainer = styled.div`
 position: absolute;
-  width: calc(100% - 1130px);
+  width: calc(100% - 1170px);
   top: 0px;
   right: 0px;
-  left: 1113px;
+  left: 1140px;
   height: 76px;
   font-size: 18px;
   color: #2c3e50;
@@ -974,10 +972,9 @@ export const Headerimagecontainer = styled.div`
 `;
 export const Imagecontainer = styled.div`
   position: absolute;
-  width: calc(100% - 1456.46px);
+  width: calc(100% - 1500px);
   top: 165px;
-  right: 18.08px;
-  left: 1438.38px;
+  left: 1460px;
   height: 295px;
   box-shadow: 0px 20px 70px rgba(86, 89, 146, 0.1);
   background-color: var(--white);
@@ -985,7 +982,7 @@ export const Imagecontainer = styled.div`
 `;
 export const Controltitle = styled.div`
   position: absolute;
-  width: 31.41%;
+  width: 100%;
   top: 3.94%;
   left: 32.28%;
   font-weight: 600;
@@ -1091,7 +1088,7 @@ export const Boxwatertext = styled.div`
 `;
 export const Wateringicon = styled.img`
   position: absolute;
-  width: calc(100% - 129.64px);
+  right: 100px;
 `;
 export const Wateringcontainer = styled.div`
   position: absolute;
@@ -1114,7 +1111,7 @@ export const Turnwatercontainer = styled.div`
 `;
 export const Adddevicetext = styled.div`
   position: absolute;
-  width: calc(100% - 123.55px);
+  width: 100%;
   top: 13px;
   left: 45.2px;
   display: inline-block;
@@ -1163,10 +1160,10 @@ export const Boxadddevices = styled.div`
 `;
 export const Controllercontainer = styled.div`
   position: absolute;
-  width: calc(100% - 1456.46px);
+  width: calc(100% - 1500px);
   top: 507px;
   right: 18.08px;
-  left: 1438.38px;
+  left: 1460px;
   height: 558px;
   background-color: var(--white);
   border-radius: 15px;
