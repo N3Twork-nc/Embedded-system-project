@@ -1186,22 +1186,53 @@ export const DashboardRoot = styled.div`
 export const Dropdown1Container = styled.div`
   position: relative;
   left: 16%;
-  top: 8%;
+  top: 5%;
   z-index:1;
 `;
 export const Dropdown2Container = styled.div`
   position: relative;
   left: 16%;
-  top: 8%;
+  top: 5%;
   z-index:1;
 `;
 export const Dropdown3Container = styled.div`
   position: relative;
   left: 16%;
-  top: 8%;
+  top: 5%;
   z-index:1;
 `;
 
 export const LightGraph = styled.div`
- background-color: #111111;
+  position: relative;
+  height: 30.66%;
+  width: 58.99%;
+  margin-top: 65%;
+  right: 1.21%;
+  bottom: 52%;
+  left: 13.81%;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+`;
+
+export const Dropdown4Container = styled.div`
+  position: relative;
+  left: 16%;
+  top: 5%;
+  z-index:1;
+`;
+
+export const SoilGraph = styled.div`
+  position: relative;
+  height: 30.66%;
+  width: 58.99%;
+  margin-top: 10%;
+  right: 1.21%;
+  bottom: 71%;
+  left: 13.81%;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
 `;
