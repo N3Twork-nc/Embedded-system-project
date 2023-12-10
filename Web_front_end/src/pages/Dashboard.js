@@ -1,8 +1,112 @@
-import React, {useState} from 'react'
-import * as styles from './styleDashboard'
+import React, {useState, useEffect } from 'react';
+import * as styles from './styleDashboard';
+import Plotly from 'plotly.js-dist';
 
 const Dashboard = () => {
-  
+  const [tempYArray, setTempYArray] = useState([1, 2, 4, 5, 6, 4, 8, 9, 10, 9, 10, 9, 8, 10, 12, 8, 6, 5, 8, 7, 7, 7, 7, 9, 10, 9, 10, 9, 8, 10, 12]);
+  const [humidYArray, setHumidYArray] = useState([2, 3, 5, 6, 7, 5, 9, 10, 11, 10, 11, 10, 9, 11, 13, 9, 7, 6, 9, 8, 8, 8, 8, 10, 11, 10, 11, 10, 9, 11, 13]);
+  const [lightYArray, setLightYArray] = useState([2, 3, 5, 6, 7, 5, 9, 10, 11, 10, 11, 10, 9, 11, 13, 9, 7, 6, 9, 8, 8, 8, 8, 10, 11, 10, 11, 10, 9, 11, 13]);
+  const [selectedTempRange, setSelectedTempRange] = useState('24h');
+  const [selectedHumidRange, setSelectedHumidRange] = useState('24h');
+  const [selectedLightRange, setSelectedLightRange] = useState('24h');
+
+  useEffect(() => {
+    const tempXData = generateXData(selectedTempRange);
+    const humidXData = generateXData(selectedHumidRange);
+    const lightXData = generateXData(selectedLightRange);
+
+    const tempData = [{
+      x: tempXData,
+      y: tempYArray,
+      mode: "lines"
+    }];
+
+    const humidData = [{
+      x: humidXData,
+      y: humidYArray,
+      mode: "lines"
+    }];
+    const lightData = [{
+      x: lightXData,
+      y: lightYArray,
+      mode: "lines"
+    }];
+
+    const tempLayout = {
+      xaxis: {
+        range: [1, tempXData.length],
+        title: "Thời gian",
+        tickvals: tempXData,
+        ticktext: tempXData.map(value => value.toString())
+      },
+      yaxis: { range: [5, 16], title: "Giá trị nhiệt độ °C" },
+      title: "Biểu đồ nhiệt độ"
+    };
+
+    const humidLayout = {
+      xaxis: {
+        range: [1, humidXData.length],
+        title: "Thời gian",
+        tickvals: humidXData,
+        ticktext: humidXData.map(value => value.toString())
+      },
+      yaxis: { range: [0, 15], title: "Độ ẩm (%)" },
+      title: "Biểu đồ độ ẩm"
+    };
+    const lightLayout = {
+      xaxis: {
+        range: [1, lightXData.length],
+        title: "Thời gian",
+        tickvals: lightXData,
+        ticktext: lightXData.map(value => value.toString())
+      },
+      yaxis: { range: [0, 15], title: "Ánh sáng" },
+      title: "Biểu đồ cường độ ánh sáng"
+    };
+
+    Plotly.newPlot("tempChart", tempData, tempLayout);
+    Plotly.newPlot("humidChart", humidData, humidLayout);
+    Plotly.newPlot("lightChart", lightData, lightLayout);
+  }, [tempYArray, humidYArray, lightYArray, selectedTempRange, selectedHumidRange,selectedLightRange]);
+
+  const handleTempDropdownChange = (event) => {
+    setSelectedTempRange(event.target.value);
+  };
+
+  const handleHumidDropdownChange = (event) => {
+    setSelectedHumidRange(event.target.value);
+  };
+  const handleLightDropdownChange = (event) => {
+    setSelectedLightRange(event.target.value);
+  };
+
+
+  const generateXData = (selected) => {
+    switch (selected) {
+      case '24h':
+        return Array.from({ length: 24 }, (_, i) => i + 1);
+      case '7d':
+        return generateDateRange(7);
+      case '30d':
+        return generateDateRange(30);
+      default:
+        return Array.from({ length: 24 }, (_, i) => i + 1);
+    }
+  };
+
+  const generateDateRange = (daysAgo) => {
+    const dates = [];
+    const currentDate = new Date();
+
+    for (let i = daysAgo - 1; i >= 0; i--) {
+      const date = new Date(currentDate);
+      date.setDate(currentDate.getDate() - i);
+      const formattedDate = `${date.getDate()}/${date.getMonth() + 1}`; // Format: dd/mm
+      dates.push(formattedDate);
+    }
+
+    return dates;
+  };
   const Click = () => {
     window.location.href = "https://www.google.com";
   }
@@ -186,17 +290,76 @@ const Dashboard = () => {
         </styles.Boxadddevices>
 
       </styles.Controllercontainer>
-
-        {/* Biểu đồ nhiệt độ */}
+      
+      {/* Biểu đồ nhiệt độ */}
       <styles.TempGraph>
-   
+        <styles.Dropdown1Container>
+          <select
+            value={selectedTempRange}
+            onChange={handleTempDropdownChange}
+            style={{
+              padding: '4px',
+              fontSize: '18px',
+              fontWeight: 'bold',
+              border: '1px solid #056C09',
+              borderRadius: '4px',
+              backgroundColor: '#EBFFE2'
+            }}
+          >
+            <option value="24h">24h qua</option>
+            <option value="7d">7 ngày qua</option>
+            <option value="30d">30 ngày qua</option>
+          </select>
+        </styles.Dropdown1Container>
+        <div id="tempChart" style={{ height: '450px', width: '100%' }}></div>
       </styles.TempGraph>
 
       {/* Biểu đồ độ ẩm */}
       <styles.HumiGraph>
-     
+        <styles.Dropdown2Container>
+          <select
+            value={selectedHumidRange}
+            onChange={handleHumidDropdownChange}
+            style={{
+              padding: '4px',
+              fontSize: '18px',
+              fontWeight: 'bold',
+              border: '1px solid #056C09',
+              borderRadius: '4px',
+              backgroundColor: '#EBFFE2'
+            }}
+          >
+            <option value="24h">24h qua</option>
+            <option value="7d">7 ngày qua</option>
+            <option value="30d">30 ngày qua</option>
+          </select>
+        </styles.Dropdown2Container>
+        <div id="humidChart" style={{ height: '450px', width: '100%' }}></div>
       </styles.HumiGraph>
-
+      
+       {/* Biểu đồ ánh sáng */}
+       <styles.LightGraph>
+        <styles.Dropdown3Container>
+          <select
+            value={selectedLightRange}
+            onChange={handleLightDropdownChange}
+            style={{
+              padding: '4px',
+              fontSize: '18px',
+              fontWeight: 'bold',
+              border: '1px solid #056C09',
+              borderRadius: '4px',
+              backgroundColor: '#EBFFE2'
+            }}
+          >
+            <option value="24h">24h qua</option>
+            <option value="7d">7 ngày qua</option>
+            <option value="30d">30 ngày qua</option>
+          </select>
+        </styles.Dropdown3Container>
+        <div id="lightChart" style={{ height: '450px', width: '100%' }}></div>
+      </styles.LightGraph>
+      
     </styles.DashboardRoot>
 
   );

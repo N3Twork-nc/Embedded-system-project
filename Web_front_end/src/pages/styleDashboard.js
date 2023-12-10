@@ -619,19 +619,17 @@ export const CircleChart = styled.div`
   padding: var(--padding-xl);
 `;
 export const HumiGraph = styled.div`
-  position: absolute;
+  position: relative;
   height: 30.66%;
   width: 58.99%;
-  top: 72.01%;
-  right: 23.21%;
-  bottom: -2.67%;
-  left: 17.81%;
+  margin-top: 62%;
+  right: 1.21%;
+  bottom: 32%;
+  left: 13.81%;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
   justify-content: flex-start;
-  gap: var(--gap-13xl);
-  font-size: var(--font-size-xl);
 `;
 export const Chart1Icon = styled.img`
   position: absolute;
@@ -641,19 +639,17 @@ export const Chart1Icon = styled.img`
   height: 104px;
 `;
 export const TempGraph = styled.div`
-  position: absolute;
+  position: relative;
   height: 30.66%;
   width: 58.99%;
   top: 37.34%;
-  right: 23.21%;
+  right: 1.21%;
   bottom: 32%;
-  left: 17.81%;
+  left: 13.81%;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
   justify-content: flex-start;
-  gap: var(--gap-13xl);
-  font-size: var(--font-size-xl);
 `;
 export const Taskbar = styled.div`
   position: absolute;
@@ -764,12 +760,12 @@ export const Plantaholic = styled.b`
 `;
 export const LogoIcon = styled.img`
   position: absolute;
-  height: 4.8%;
+  height: 7.8%;
   width: 22.02%;
-  top: 5.13%;
+  top: 3.13%;
   right: 65.57%;
   bottom: 90.07%;
-  left: 12.41%;
+  left: 10.41%;
   max-width: 100%;
   overflow: hidden;
   max-height: 100%;
@@ -798,9 +794,8 @@ export const Navlist = styled.div`
   position: absolute;
   height: 1.99%;
   width: 70.44%;
-  top: 90%;
   right: 10.95%;
-  bottom: 38.3%;
+  bottom: 5.3%;
   left: 18.61%;
   display: flex;
   flex-direction: row;
@@ -830,11 +825,10 @@ export const Indicator = styled.div`
 `;
 export const Navlist1 = styled.div`
   position: absolute;
-  height: 1.99%;
+  height: 2.99%;
   width: 70.44%;
-  top: 85%;
   right: 9.49%;
-  bottom: 34.24%;
+  bottom: 9.24%;
   left: 20.07%;
   overflow: hidden;
   display: flex;
@@ -845,12 +839,10 @@ export const Navlist1 = styled.div`
   font-size: var(--headline-size);
 `;
 export const Taskbarcontainer = styled.div`
-  position: absolute;
-  height: 107.75%;
+  position: fixed;
+  height: 100vh;
   width: 15.25%;
-  top: -2.85%;
-  right: 84.75%;
-  bottom: -4.9%;
+  top: 0;
   left: 0%;
   font-size: var(--font-size-mid);
   color: var(--white);
@@ -1196,10 +1188,33 @@ export const DashboardRoot = styled.div`
   position: relative;
   background-color: #ebffe2;
   width: 100%;
-  height: 1122px;
+  height: 1700px;
   overflow: hidden;
   text-align: left;
   font-size: var(--font-size-4xl);
   color: var(--primary);
   font-family: var(--font-roboto);
+`;
+export const Dropdown1Container = styled.div`
+  position: relative;
+  left: 16%;
+  top: 8%;
+  z-index:1;
+`;
+export const Dropdown2Container = styled.div`
+  position: relative;
+  left: 16%;
+  top: 8%;
+  z-index:1;
+`;
+export const Dropdown3Container = styled.div`
+  position: relative;
+  left: 16%;
+  top: 8%;
+  z-index:1;
+`;
+
+export const LightGraph = styled.div`
+ background-color: #111111;
+ 
 `;
