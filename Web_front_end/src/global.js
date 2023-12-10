@@ -67,3 +67,9 @@ export default createGlobalStyle`
 --shadow: 0px 2px 10px rgba(124, 141, 181, 0.12);
 }
 `;
+export const fonts = {
+  roboto: 'Roboto',
+  gilroy: 'Gilroy',
+  footnote: 'Poppins',
+  montserrat: 'Montserrat',
+};

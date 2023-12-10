@@ -1,6 +1,7 @@
 import React, {useState, useEffect } from 'react';
 import * as styles from './styleDashboard';
 import Plotly from 'plotly.js-dist';
+import { fonts } from '../global';
 
 const Dashboard = () => {
   const [tempYArray, setTempYArray] = useState([1, 2, 4, 5, 6, 4, 8, 9, 10, 9, 10, 9, 8, 10, 12, 8, 6, 5, 8, 7, 7, 7, 7, 9, 10, 9, 10, 9, 8, 10, 12]);
@@ -127,10 +128,31 @@ const Dashboard = () => {
 
     return dates;
   };
-  const Click = () => {
-    window.location.href = "https://www.google.com";
-  }
-  // nhấn nút
+
+// Thêm vườn
+const [modalVisible, setModalVisible] = useState(false);
+const [tenVuon, setTenVuon] = useState('');
+const [viTri, setViTri] = useState('');
+const [cayTrong, setCayTrong] = useState('');
+
+const showModal = () => {
+  setModalVisible(true);
+  setTenVuon('');
+  setViTri('');
+  setCayTrong('');
+};
+
+const hideModal = () => {
+  setModalVisible(false);
+};
+
+const saveData = () => {
+  console.log(`Tên vườn: ${tenVuon}, Vị trí: ${viTri}, Cây trồng: ${cayTrong}`);
+  hideModal();
+};
+
+
+  // nhấn nút bật tắt thiết bị
   const [shiftedLight, setShiftedLight] = useState(false);
   const [shiftedWater, setShiftedWater] = useState(false);
 
@@ -151,7 +173,37 @@ const Dashboard = () => {
             <styles.Addgardenitems>
               <styles.Icongarden alt="" src="/icongarden.svg" />
               <styles.TextAddGarden>Thêm vườn</styles.TextAddGarden>
-              <styles.Iconaddgarden onClick={Click} alt="" src="/add.png" />
+              <styles.Iconaddgarden alt="" src="/add.png" onClick={showModal} />
+                {/* Hiển thị modal khi modalVisible là true */}
+                {modalVisible && (
+                  <div className="modal" style={{ position: 'absolute', width: 289,padding: 20,top: 48,marginLeft: -26,fontSize: '16px', border: '1px solid #fff',fontWeight: 'bold',zIndex: 1,backgroundColor: '#fff'}}>
+                    {/* Nội dung của modal */}
+                    <div className="modal-content">
+                      <input
+                        type="text"
+                        placeholder="Tên vườn"
+                        value={tenVuon}
+                        onChange={(e) => setTenVuon(e.target.value)}
+                        style={{left: '20px', marginBottom: '10px', fontSize: 18, width: 275, padding: 5}}
+                      /><br />
+
+                      <input
+                        type="text"  placeholder="Vị trí"   
+                        value={viTri}  onChange={(e) => setViTri(e.target.value)}
+                        style={{left: '20px', marginBottom: '10px', fontSize: 18, width: 275, padding: 5}}/><br />
+                      <input
+                        type="text" placeholder="Cây trồng"
+                        value={cayTrong} onChange={(e) => setCayTrong(e.target.value)}
+                        style={{marginBottom: '10px', fontSize: 18, width: 275, padding: 5}}/><br />
+                     
+                      <button style={{fontSize: 18,marginLeft: 70, backgroundColor: '#B4E0A0', marginRight: 15, borderWidth: 1, fontFamily: `var(--font-${fonts.roboto})`, borderRadius: 5, padding: 5, width: 70 }} 
+                              onClick={saveData}>Lưu</button>
+                      <button style={{fontSize: 18, backgroundColor: '#B4E0A0', borderWidth: 1, fontFamily: `var(--font-${fonts.roboto})`, borderRadius: 5, padding: 5, width: 70 }} 
+                              onClick={hideModal}>Hủy</button>
+
+                    </div>
+                  </div>
+                )}              
             </styles.Addgardenitems>
           </styles.AddgardenContainer>
         </styles.Webheadercontainer>
@@ -301,14 +353,6 @@ const Dashboard = () => {
             <styles.Wateringicon alt="" src="/watering.png" />
           </styles.Wateringcontainer>
         </styles.Turnwatercontainer>
-        {/* Thêm thiết bị */}
-        <styles.Boxadddevices>
-          <styles.Adddevicetext>Thêm thiết bị</styles.Adddevicetext>
-          <styles.Addbutton>
-            <styles.Iconadddevice alt="" src="/add1.png" />
-          </styles.Addbutton>
-        </styles.Boxadddevices>
-
       </styles.Controllercontainer>
       
       {/* Biểu đồ nhiệt độ */}
@@ -409,3 +453,4 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+
