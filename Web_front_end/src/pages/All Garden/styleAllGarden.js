@@ -133,9 +133,20 @@ export const ButtonOptionContainer = styled.div`
   justify-content: center;
   margin-top: 30px;
 `
-export const ButtonOptionItems1 = styled.img`
+export const ButtonOptionDelete = styled.img`
   width: 35px;
   height: 35px;
+  margin-right: 40px;
+  &:hover {
+  box-shadow: 0 0 5px 1px var(--main);
+}
+`
+export const ButtonOptionEdit = styled.img`
+  width: 35px;
+  height: 35px;
+  &:hover {
+  box-shadow: 0 0 5px 1px var(--main);
+}
 `
 export const MoreIcon = styled.img`
   position: relative;
@@ -450,7 +461,7 @@ export const DashboardRoot = styled.div`
   position: relative;
   background-color: #ebffe2;
   width: 100%;
-  height: 3000px;
+  height: 2000px;
   overflow: hidden;
   text-align: left;
   font-size: var(--font-size-4xl);
