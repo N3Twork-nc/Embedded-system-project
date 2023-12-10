@@ -118,13 +118,12 @@ export const Userinfocontainer = styled.div`
   font-size: 27px;
 `;
 export const Maininforcontainer = styled.div`
-  position: absolute;
-  height: 6.6%;
-  width: 58.82%;
-  top: 11.59%;
-  right: 23.21%;
-  bottom: 81.82%;
-  left: 17.97%;
+position: absolute;
+  width: calc(100% - 743.29px);
+  top: 130px;
+  right: 418.86px;
+  left: 324.44px;
+  height: 74px;
   color: var(--color-darkgreen-100);
 `;
 export const Soiltext = styled.div`
@@ -340,13 +339,12 @@ export const Tempboxcontainer = styled.div`
   box-shadow: var(--shadow);
 `;
 export const Mainparametercontainer = styled.div`
-  position: absolute;
-  height: 11.59%;
-  width: 58.65%;
-  top: 20.5%;
-  right: 23.21%;
-  bottom: 67.91%;
-  left: 18.14%;
+position: absolute;
+  width: calc(100% - 746.31px);
+  top: 230px;
+  right: 418.86px;
+  left: 327.45px;
+  height: 130px;
   font-size: var(--font-size-11xl);
   color: var(--color-midnightblue);
   font-family: var(--footnote);
@@ -622,7 +620,7 @@ export const HumiGraph = styled.div`
   position: relative;
   height: 30.66%;
   width: 58.99%;
-  margin-top: 62%;
+  top: 2%;
   right: 1.21%;
   bottom: 32%;
   left: 13.81%;
@@ -642,7 +640,7 @@ export const TempGraph = styled.div`
   position: relative;
   height: 30.66%;
   width: 58.99%;
-  top: 37.34%;
+  top: 15%;
   right: 1.21%;
   bottom: 32%;
   left: 13.81%;
@@ -910,13 +908,12 @@ export const Addgardenitems = styled.div`
 
 `;
 export const AddgardenContainer = styled.div`
-  position: absolute;
-  height: 100%;
-  width: 23.78%;
-  top: 0%;
-  right: 0%;
-  bottom: 0%;
-  left: 76.22%;
+position: absolute;
+  width: calc(100% - 1130px);
+  top: 0px;
+  right: 0px;
+  left: 1113px;
+  height: 76px;
   font-size: 18px;
   color: #2c3e50;
   font-family: var(--font-roboto);
@@ -924,13 +921,12 @@ export const AddgardenContainer = styled.div`
   border-radius: 15px;
 `;
 export const Webheadercontainer = styled.div`
-  position: absolute;
-  height: 6.77%;
-  width: 81.19%;
-  top: 3.21%;
-  right: 0.83%;
-  bottom: 90.02%;
-  left: 17.97%;
+    position: absolute;
+  width: calc(100% - 339.5px);
+  top: 36px;
+  right: 15.07px;
+  left: 324.44px;
+  height: 76px;
   font-size: 40px;
   font-family: var(--footnote);
 `;
@@ -978,12 +974,11 @@ export const Headerimagecontainer = styled.div`
 `;
 export const Imagecontainer = styled.div`
   position: absolute;
-  height: 26.29%;
-  width: 19.31%;
-  top: 14.71%;
-  right: 1%;
-  bottom: 59%;
-  left: 79.69%;
+  width: calc(100% - 1456.46px);
+  top: 165px;
+  right: 18.08px;
+  left: 1438.38px;
+  height: 295px;
   box-shadow: 0px 20px 70px rgba(86, 89, 146, 0.1);
   background-color: var(--white);
   border-radius: 15px;
@@ -1076,12 +1071,11 @@ export const Lightcontainer = styled.div`
 `;
 export const Turnlightcontainer = styled.div`
   position: absolute;
-  height: 24.01%;
-  width: 74.64%;
-  top: 31.72%;
-  right: 11.82%;
-  bottom: 44.27%;
-  left: 13.54%;
+  width: calc(100% - 88.39px);
+  top: 177px;
+  right: 41.18px;
+  left: 47.21px;
+  height: 134px;
   font-size: var(--caption-medium-size);
   color: var(--color-seagreen);
   font-family: var(--font-gilroy);
@@ -1097,34 +1091,32 @@ export const Boxwatertext = styled.div`
 `;
 export const Wateringicon = styled.img`
   position: absolute;
-  width: 45%;
+  width: calc(100% - 129.64px);
 `;
 export const Wateringcontainer = styled.div`
   position: absolute;
-  height: 45.49%;
-  width: 70.16%;
-  top: 25.72%;
-  right: 17.44%;
-  bottom: 28.79%;
-  left: 12.4%;
+  width: calc(100% - 77.34px);
+  top: 36.78px;
+  right: 45.2px;
+  left: 32.14px;
+  height: 65.05px;
 `;
 export const Turnwatercontainer = styled.div`
   position: absolute;
-  height: 25.63%;
-  width: 74.35%;
-  top: 65.23%;
-  right: 12.68%;
-  bottom: 9.14%;
-  left: 12.97%;
+  width: calc(100% - 89.4px);
+  top: 364px;
+  right: 44.2px;
+  left: 45.2px;
+  height: 143px;
   font-size: var(--caption-medium-size);
   color: var(--color-seagreen);
   font-family: var(--font-gilroy);
 `;
 export const Adddevicetext = styled.div`
   position: absolute;
-  width: 52.33%;
-  top: 24.53%;
-  left: 17.44%;
+  width: calc(100% - 123.55px);
+  top: 13px;
+  left: 45.2px;
   display: inline-block;
 `;
 export const Iconadddevice = styled.img`
@@ -1150,12 +1142,10 @@ export const Addbutton = styled.div`
 `;
 export const Boxdevice = styled.div`
   position: absolute;
-  height: 100%;
   width: 100%;
-  top: 0%;
-  right: 0%;
-  bottom: 0%;
-  left: 0%;
+  top: 0px;
+  right: 0px;
+  left: 0px;
   border-radius: var(--br-3xs);
   background-color: rgba(180, 224, 160, 0);
   border: 1px solid var(--color-seagreen);
@@ -1163,23 +1153,21 @@ export const Boxdevice = styled.div`
 `;
 export const Boxadddevices = styled.div`
   position: absolute;
-  height: 9.5%;
-  width: 74.35%;
-  top: 14.34%;
-  right: 11.82%;
-  bottom: 76.16%;
-  left: 13.83%;
+  width: calc(100% - 89.4px);
+  top: 80px;
+  right: 41.18px;
+  left: 48.21px;
+  height: 53px;
   border: 1px solid var(--color-seagreen);
   border-radius: var(--br-3xs);
 `;
 export const Controllercontainer = styled.div`
   position: absolute;
-  height: 49.73%;
-  width: 19.31%;
-  top: 45.19%;
-  right: 1%;
-  bottom: 5.08%;
-  left: 79.69%;
+  width: calc(100% - 1456.46px);
+  top: 507px;
+  right: 18.08px;
+  left: 1438.38px;
+  height: 558px;
   background-color: var(--white);
   border-radius: 15px;
   box-shadow: 0px 20px 70px rgba(86, 89, 146, 0.1);
@@ -1188,7 +1176,7 @@ export const DashboardRoot = styled.div`
   position: relative;
   background-color: #ebffe2;
   width: 100%;
-  height: 1700px;
+  height: 3000px;
   overflow: hidden;
   text-align: left;
   font-size: var(--font-size-4xl);
@@ -1216,5 +1204,4 @@ export const Dropdown3Container = styled.div`
 
 export const LightGraph = styled.div`
  background-color: #111111;
- 
 `;
