@@ -130,8 +130,8 @@ const Dashboard = () => {
           <styles.AddgardenContainer>
             <styles.Addgardenitems>
               <styles.Icongarden alt="" src="/icongarden.svg" />
-              <styles.TextAddGarden onClick={Click}>Thêm vườn</styles.TextAddGarden>
-              <styles.Iconaddgarden alt="" src="/add.png" />
+              <styles.TextAddGarden>Thêm vườn</styles.TextAddGarden>
+              <styles.Iconaddgarden onClick={Click} alt="" src="/add.png" />
             </styles.Addgardenitems>
           </styles.AddgardenContainer>
         </styles.Webheadercontainer>
