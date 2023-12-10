@@ -66,6 +66,22 @@ export default createGlobalStyle`
 /* Effects */
 --shadow: 0px 2px 10px rgba(124, 141, 181, 0.12);
 }
+
+/* fonts */
+--font-poppins: Poppins;
+
+/* font sizes */
+--font-size-xl: 20px;
+
+/* Colors */
+--color-darkgreen-100: #166d29;
+--color-darkslategray: #2f2f2f;
+--color-white: #fff;
+--color-silver: #bfbfbf;
+
+/* Border radiuses */
+--br-5xs: 8px;
+
 `;
 export const fonts = {
   roboto: 'Roboto',
@@ -73,3 +89,6 @@ export const fonts = {
   footnote: 'Poppins',
   montserrat: 'Montserrat',
 };
+
+
+

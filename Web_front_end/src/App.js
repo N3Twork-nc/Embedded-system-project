@@ -5,6 +5,7 @@ import {
   useNavigationType,
   useLocation,
 } from "react-router-dom";
+import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import AllGarden from "./pages/All Garden/allGarden";
 
