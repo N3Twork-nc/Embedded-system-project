@@ -7,8 +7,10 @@ import {
 } from "react-router-dom";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import AllGarden from "./pages/All Garden/allGarden";
+import * as y from "./api/garden";
 
 function App() {
+
   const action = useNavigationType();
   const location = useLocation();
   const pathname = location.pathname;
