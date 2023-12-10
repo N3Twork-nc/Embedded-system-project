@@ -25,6 +25,7 @@ export default createGlobalStyle`
 /* Colors */
 --color-seagreen: #0d986a;
 --primary: #000;
+--main: #B4E0A0;
 --white: #fff;
 --red: #ff3b30;
 --color-darkgreen-100: #0d6511;

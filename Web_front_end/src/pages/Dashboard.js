@@ -110,9 +110,33 @@ const Dashboard = () => {
   const Click = () => {
     window.location.href = "https://www.google.com";
   }
+  // nhấn nút
+  const [shiftedLight, setShiftedLight] = useState(false);
+  const [shiftedWater, setShiftedWater] = useState(false);
+
+
+  const handleButtonLightClick = () => {
+    setShiftedLight(!shiftedLight); // Đảo ngược giá trị mỗi khi được nhấp
+  };
+  const handleButtonWaterClick = () => {
+    setShiftedWater(!shiftedWater); // Đảo ngược giá trị mỗi khi được nhấp
+  };
+
   return (
     <styles.DashboardRoot>
     {/* Header */}
+      <styles.Webheadercontainer>
+          <styles.Dashboard2>Dashboard</styles.Dashboard2>
+          <styles.AddgardenContainer>
+            <styles.Addgardenitems>
+              <styles.Icongarden alt="" src="/icongarden.svg" />
+              <styles.TextAddGarden onClick={Click}>Thêm vườn</styles.TextAddGarden>
+              <styles.Iconaddgarden alt="" src="/add.png" />
+            </styles.Addgardenitems>
+          </styles.AddgardenContainer>
+        </styles.Webheadercontainer>
+
+    {/* Subheader */}
       <styles.Maininforcontainer>
         {/* Chọn vườn */}
         <styles.Gardennamecontainer>
@@ -180,9 +204,8 @@ const Dashboard = () => {
           <styles.Temptitle>Nhiệt độ</styles.Temptitle>
         </styles.Tempboxcontainer>
       </styles.Mainparametercontainer>
-
-      
-    
+   
+    {/* Taskbar */}
       <styles.Taskbarcontainer>
         <styles.Taskbar />
         <styles.ItemAboutUs>
@@ -199,6 +222,7 @@ const Dashboard = () => {
         </styles.ItemDashboard>
         <styles.Plantaholic>Plantaholic</styles.Plantaholic>
         <styles.LogoIcon alt="" src="/logo@2x.png" />
+
         <styles.Navlist>
           <styles.Icontext>
             <styles.MoreIcon alt="" src="/info.svg" />
@@ -206,6 +230,7 @@ const Dashboard = () => {
           </styles.Icontext>
           <styles.ChevronDownIcon2 alt="" src="/chevrondown1.svg" />
         </styles.Navlist>
+
         <styles.Navlist1>
           <styles.Icontext>
             <styles.MoreIcon alt="" src="/logout.svg" />
@@ -219,64 +244,51 @@ const Dashboard = () => {
         </styles.Navlist1>
       </styles.Taskbarcontainer>
 
-      <styles.Webheadercontainer>
-        <styles.Dashboard2>Dashboard</styles.Dashboard2>
-        <styles.AddgardenContainer>
-          <styles.Addgardenitems>
-            <styles.Icongarden alt="" src="/icongarden.svg" />
-            <styles.TextAddGarden onClick={Click}>Thêm vườn</styles.TextAddGarden>
-            <styles.Iconaddgarden alt="" src="/add.png" />
-          </styles.Addgardenitems>
-        </styles.AddgardenContainer>
-      </styles.Webheadercontainer>
 
-
+      {/* Hình ảnh */}
       <styles.Imagecontainer>
-        <styles.Boxaddgarden />
         <styles.ImageGardenIcon alt="" src="/image-garden@2x.png" />
         <styles.Headerimagecontainer>
-          <styles.ButtoneditIcon alt="" src="/buttonedit@2x.png" />
+          <styles.ButtoneditIcon alt="" src="/edit.png" />
           <styles.Imagetitle>Hình ảnh</styles.Imagetitle>
         </styles.Headerimagecontainer>
       </styles.Imagecontainer>
+
+      {/* Bảng điều khiển */}
       <styles.Controllercontainer>
-        <styles.Boxgardenname />
         <styles.Controltitle>Điều khiển</styles.Controltitle>
+        {/* Bật đèn */}
         <styles.Turnlightcontainer>
-          <styles.Boxwater />
           <styles.Lightcontainer>
             <styles.Boxlighttext>
-              <styles.Buttonlight>
-                <styles.On>On</styles.On>
-                <styles.ButtonlightChild alt="" src="/rectangle-16.svg" />
-                <styles.ButtonlightItem />
+              <styles.Buttonlight onClick={handleButtonLightClick}>
+                <styles.ButtonlightItem shifted={shiftedLight} />
               </styles.Buttonlight>
               <styles.Textlight>Bật tắt đèn</styles.Textlight>
             </styles.Boxlighttext>
-            <styles.Lighticon alt="" src="/lighticon.svg" />
+            <styles.Lighticon alt="" src="/lighton.png" />
           </styles.Lightcontainer>
         </styles.Turnlightcontainer>
+        {/* Bật nước */}
         <styles.Turnwatercontainer>
-          <styles.Boxwater />
           <styles.Wateringcontainer>
             <styles.Boxwatertext>
-              <styles.Buttonlight>
-                <styles.On1>On</styles.On1>
-                <styles.ButtonlightChild alt="" src="/rectangle-161.svg" />
-                <styles.ButtonlightItem />
+            <styles.Buttonlight onClick={handleButtonWaterClick}>
+                <styles.ButtonlightItem shifted={shiftedWater} />
               </styles.Buttonlight>
               <styles.Textlight>Tưới nước</styles.Textlight>
             </styles.Boxwatertext>
-            <styles.Wateringicon alt="" src="/lighticon.svg" />
+            <styles.Wateringicon alt="" src="/drops.png" />
           </styles.Wateringcontainer>
         </styles.Turnwatercontainer>
+        {/* Thêm thiết bị */}
         <styles.Boxadddevices>
           <styles.Adddevicetext>Thêm thiết bị</styles.Adddevicetext>
           <styles.Addbutton>
-            <styles.Iconadddevice/>
+            <styles.Iconadddevice alt="" src="/add1.png" />
           </styles.Addbutton>
-          <styles.Boxdevice />
         </styles.Boxadddevices>
+
       </styles.Controllercontainer>
       
       {/* Biểu đồ nhiệt độ */}
