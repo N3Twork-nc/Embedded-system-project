@@ -278,7 +278,7 @@ const Dashboard = () => {
               </styles.Buttonlight>
               <styles.Textlight>Tưới nước</styles.Textlight>
             </styles.Boxwatertext>
-            <styles.Wateringicon alt="" src="/drops.png" />
+            <styles.Wateringicon alt="" src="/watering.png" />
           </styles.Wateringcontainer>
         </styles.Turnwatercontainer>
         {/* Thêm thiết bị */}
