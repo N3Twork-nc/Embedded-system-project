@@ -27,15 +27,15 @@ export const Dropdownicon = styled.img`
 `;
 export const Dropdownlist = styled.div`
   position: absolute;
-  width: 100%;
+  width: 80%;
   top: 13px;
-  left: 20%;
+  left: 0%;
   font-weight: 600;
   display: inline-block;
 `;
 export const Gardennamecontainer = styled.div`
   position: absolute;
-  width: calc(100% - 830px);
+  width: calc(100% - 810px);
   top: 10px;
   left: 830px;
   box-shadow: 0px 20px 70px rgba(86, 89, 146, 0.1);
@@ -983,7 +983,7 @@ export const Imagecontainer = styled.div`
 export const Controltitle = styled.div`
   position: absolute;
   width: 100%;
-  top: 3.94%;
+  top: 6%;
   left: 32.28%;
   font-weight: 600;
   display: inline-block;
@@ -1018,7 +1018,7 @@ export const ButtonlightItem = styled.div`
   height: 80%;
   width: 46%;
   top: 10%;
-  left: ${(props) => (props.shifted ? 'calc(2% + 30px)' : '2%')};
+  left: ${(props) => (props.shifted ? 'calc(2% + 28px)' : '2%')};
   bottom: 13.09%;
   border-radius: 50%;
   background-color: ${(props) => (props.shifted ? 'var(--color-seagreen)' : 'var(--primary)')};
@@ -1069,7 +1069,7 @@ export const Lightcontainer = styled.div`
 export const Turnlightcontainer = styled.div`
   position: absolute;
   width: calc(100% - 88.39px);
-  top: 177px;
+  margin-top: 50px;
   right: 41.18px;
   left: 47.21px;
   height: 134px;
@@ -1093,7 +1093,6 @@ export const Wateringicon = styled.img`
 export const Wateringcontainer = styled.div`
   position: absolute;
   width: calc(100% - 77.34px);
-  top: 36.78px;
   right: 45.2px;
   left: 32.14px;
   height: 65.05px;
@@ -1101,7 +1100,7 @@ export const Wateringcontainer = styled.div`
 export const Turnwatercontainer = styled.div`
   position: absolute;
   width: calc(100% - 89.4px);
-  top: 364px;
+  top: 250px;
   right: 44.2px;
   left: 45.2px;
   height: 143px;
@@ -1109,25 +1108,7 @@ export const Turnwatercontainer = styled.div`
   color: var(--color-seagreen);
   font-family: var(--font-gilroy);
 `;
-export const Adddevicetext = styled.div`
-  position: absolute;
-  width: 100%;
-  top: 13px;
-  left: 45.2px;
-  display: inline-block;
-`;
-export const Iconadddevice = styled.img`
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  border-radius: var(--br-5xs);
-  background-color: var(--white);
-  &:hover {
-  position: absolute;
-  box-shadow: 0 0 5px 1px var(--main);
-}
 
-`;
 export const Addbutton = styled.div`
   position: absolute;
   height: 60.38%;
@@ -1137,34 +1118,13 @@ export const Addbutton = styled.div`
   bottom: 18.87%;
   left: 82.17%;
 `;
-export const Boxdevice = styled.div`
-  position: absolute;
-  width: 100%;
-  top: 0px;
-  right: 0px;
-  left: 0px;
-  border-radius: var(--br-3xs);
-  background-color: rgba(180, 224, 160, 0);
-  border: 1px solid var(--color-seagreen);
-  box-sizing: border-box;
-`;
-export const Boxadddevices = styled.div`
-  position: absolute;
-  width: calc(100% - 89.4px);
-  top: 80px;
-  right: 41.18px;
-  left: 48.21px;
-  height: 53px;
-  border: 1px solid var(--color-seagreen);
-  border-radius: var(--br-3xs);
-`;
 export const Controllercontainer = styled.div`
   position: absolute;
   width: calc(100% - 1500px);
   top: 507px;
   right: 18.08px;
   left: 1460px;
-  height: 558px;
+  height: 380px;
   background-color: var(--white);
   border-radius: 15px;
   box-shadow: 0px 20px 70px rgba(86, 89, 146, 0.1);
