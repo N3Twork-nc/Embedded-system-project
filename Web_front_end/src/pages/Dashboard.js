@@ -6,14 +6,17 @@ const Dashboard = () => {
   const [tempYArray, setTempYArray] = useState([1, 2, 4, 5, 6, 4, 8, 9, 10, 9, 10, 9, 8, 10, 12, 8, 6, 5, 8, 7, 7, 7, 7, 9, 10, 9, 10, 9, 8, 10, 12]);
   const [humidYArray, setHumidYArray] = useState([2, 3, 5, 6, 7, 5, 9, 10, 11, 10, 11, 10, 9, 11, 13, 9, 7, 6, 9, 8, 8, 8, 8, 10, 11, 10, 11, 10, 9, 11, 13]);
   const [lightYArray, setLightYArray] = useState([2, 3, 5, 6, 7, 5, 9, 10, 11, 10, 11, 10, 9, 11, 13, 9, 7, 6, 9, 8, 8, 8, 8, 10, 11, 10, 11, 10, 9, 11, 13]);
+  const [soilYArray, setSoilYArray] = useState([2, 3, 5, 6, 7, 5, 9, 10, 11, 10, 11, 10, 9, 11, 13, 9, 7, 6, 9, 8, 8, 8, 8, 10, 11, 10, 11, 10, 9, 11, 13]);
   const [selectedTempRange, setSelectedTempRange] = useState('24h');
   const [selectedHumidRange, setSelectedHumidRange] = useState('24h');
   const [selectedLightRange, setSelectedLightRange] = useState('24h');
+  const [selectedSoilRange, setSelectedSoilRange] = useState('24h');
 
   useEffect(() => {
     const tempXData = generateXData(selectedTempRange);
     const humidXData = generateXData(selectedHumidRange);
     const lightXData = generateXData(selectedLightRange);
+    const soilXData = generateXData(selectedSoilRange);
 
     const tempData = [{
       x: tempXData,
@@ -29,6 +32,11 @@ const Dashboard = () => {
     const lightData = [{
       x: lightXData,
       y: lightYArray,
+      mode: "lines"
+    }];
+    const soilData = [{
+      x: soilXData,
+      y: soilYArray,
       mode: "lines"
     }];
 
@@ -50,8 +58,8 @@ const Dashboard = () => {
         tickvals: humidXData,
         ticktext: humidXData.map(value => value.toString())
       },
-      yaxis: { range: [0, 15], title: "Độ ẩm (%)" },
-      title: "Biểu đồ độ ẩm"
+      yaxis: { range: [0, 15], title: "Độ ẩm không khí (%)" },
+      title: "Biểu đồ độ ẩm không khí"
     };
     const lightLayout = {
       xaxis: {
@@ -60,14 +68,24 @@ const Dashboard = () => {
         tickvals: lightXData,
         ticktext: lightXData.map(value => value.toString())
       },
-      yaxis: { range: [0, 15], title: "Ánh sáng" },
+      yaxis: { range: [0, 15], title: "Ánh sáng (%)" },
       title: "Biểu đồ cường độ ánh sáng"
     };
-
+    const soilLayout = {
+      xaxis: {
+        range: [1, soilXData.length],
+        title: "Thời gian",
+        tickvals: soilXData,
+        ticktext: soilXData.map(value => value.toString())
+      },
+      yaxis: { range: [0, 15], title: "Độ ẩm đất (%)" },
+      title: "Biểu đồ độ ẩm đất"
+    };
     Plotly.newPlot("tempChart", tempData, tempLayout);
     Plotly.newPlot("humidChart", humidData, humidLayout);
     Plotly.newPlot("lightChart", lightData, lightLayout);
-  }, [tempYArray, humidYArray, lightYArray, selectedTempRange, selectedHumidRange,selectedLightRange]);
+    Plotly.newPlot("soilChart", soilData, soilLayout);
+  }, [tempYArray, humidYArray, lightYArray, soilYArray, selectedTempRange, selectedHumidRange, selectedLightRange, selectedSoilRange]);
 
   const handleTempDropdownChange = (event) => {
     setSelectedTempRange(event.target.value);
@@ -79,7 +97,9 @@ const Dashboard = () => {
   const handleLightDropdownChange = (event) => {
     setSelectedLightRange(event.target.value);
   };
-
+  const handleSoilDropdownChange = (event) => {
+    setSelectedSoilRange(event.target.value);
+  };
 
   const generateXData = (selected) => {
     switch (selected) {
@@ -306,7 +326,7 @@ const Dashboard = () => {
               backgroundColor: '#EBFFE2'
             }}
           >
-            <option value="24h">24h qua</option>
+            <option value="24h">24 giờ qua</option>
             <option value="7d">7 ngày qua</option>
             <option value="30d">30 ngày qua</option>
           </select>
@@ -352,13 +372,36 @@ const Dashboard = () => {
               backgroundColor: '#EBFFE2'
             }}
           >
-            <option value="24h">24h qua</option>
+            <option value="24h">24 giờ qua</option>
             <option value="7d">7 ngày qua</option>
             <option value="30d">30 ngày qua</option>
           </select>
         </styles.Dropdown3Container>
         <div id="lightChart" style={{ height: '450px', width: '100%' }}></div>
       </styles.LightGraph>
+      
+      {/* Biểu đồ độ ẩm đất */}
+      <styles.SoilGraph>
+        <styles.Dropdown4Container>
+            <select
+              value={selectedSoilRange}
+              onChange={handleSoilDropdownChange}
+              style={{
+                padding: '4px',
+                fontSize: '18px',
+                fontWeight: 'bold',
+                border: '1px solid #056C09',
+                borderRadius: '4px',
+                backgroundColor: '#EBFFE2'
+              }}
+            >
+              <option value="24h">24 giờ qua</option>
+              <option value="7d">7 ngày qua</option>
+              <option value="30d">30 ngày qua</option>
+            </select>
+          </styles.Dropdown4Container>
+          <div id="soilChart" style={{ height: '450px', width: '100%' }}></div>
+      </styles.SoilGraph>
       
     </styles.DashboardRoot>
 
