@@ -27,15 +27,15 @@ export const Dropdownicon = styled.img`
 `;
 export const Dropdownlist = styled.div`
   position: absolute;
-  width: 100%;
+  width: 80%;
   top: 13px;
-  left: 20%;
+  left: 0%;
   font-weight: 600;
   display: inline-block;
 `;
 export const Gardennamecontainer = styled.div`
   position: absolute;
-  width: calc(100% - 830px);
+  width: calc(100% - 810px);
   top: 10px;
   left: 830px;
   box-shadow: 0px 20px 70px rgba(86, 89, 146, 0.1);
@@ -618,7 +618,7 @@ export const HumiGraph = styled.div`
   position: relative;
   height: 30.66%;
   width: 58.99%;
-  top: 2%;
+  margin-top: 5%;
   right: 1.21%;
   bottom: 32%;
   left: 13.81%;
@@ -638,9 +638,8 @@ export const TempGraph = styled.div`
   position: relative;
   height: 30.66%;
   width: 58.99%;
-  top: 15%;
+  margin-top: 25%;
   right: 1.21%;
-  bottom: 32%;
   left: 13.81%;
   display: flex;
   flex-direction: row;
@@ -1131,31 +1130,31 @@ export const Controllercontainer = styled.div`
 `;
 export const DashboardRoot = styled.div`
   position: relative;
-  background-color: #ebffe2;
+  background-color: #ebffe5;
   width: 100%;
-  height: 3000px;
-  overflow: hidden;
   text-align: left;
+  overflow: hidden;
   font-size: var(--font-size-4xl);
-  color: var(--primary);
   font-family: var(--font-roboto);
+  display: flex;
+  flex-direction: column;
 `;
 export const Dropdown1Container = styled.div`
   position: relative;
   left: 16%;
-  top: 5%;
+  margin-top: 2%;
   z-index:1;
 `;
 export const Dropdown2Container = styled.div`
   position: relative;
   left: 16%;
-  top: 5%;
+  margin-top: 2%;
   z-index:1;
 `;
 export const Dropdown3Container = styled.div`
   position: relative;
   left: 16%;
-  top: 5%;
+  margin-top: 2%;
   z-index:1;
 `;
 
@@ -1163,7 +1162,7 @@ export const LightGraph = styled.div`
   position: relative;
   height: 30.66%;
   width: 58.99%;
-  margin-top: 65%;
+  margin-top: 5%;
   right: 1.21%;
   bottom: 52%;
   left: 13.81%;
@@ -1176,7 +1175,7 @@ export const LightGraph = styled.div`
 export const Dropdown4Container = styled.div`
   position: relative;
   left: 16%;
-  top: 5%;
+  margin-top: 2%;
   z-index:1;
 `;
 
@@ -1184,9 +1183,9 @@ export const SoilGraph = styled.div`
   position: relative;
   height: 30.66%;
   width: 58.99%;
-  margin-top: 10%;
+  margin-top: 5%;
   right: 1.21%;
-  bottom: 71%;
+  margin-bottom: 5%;
   left: 13.81%;
   display: flex;
   flex-direction: row;

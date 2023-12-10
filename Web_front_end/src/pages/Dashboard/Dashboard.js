@@ -1,8 +1,9 @@
 import React, {useState, useEffect } from 'react';
 import * as styles from './styleDashboard';
 import Plotly from 'plotly.js-dist';
-import { fonts } from '../global';
+import { fonts } from '../../global.js'
 import { format } from 'date-fns';
+import { Link } from 'react-router-dom';
 
 const Dashboard = () => {
   const [tempYArray, setTempYArray] = useState([1, 2, 4, 5, 6, 4, 8, 9, 10, 9, 10, 9, 8, 10, 12, 8, 6, 5, 8, 7, 7, 7, 7, 9, 10, 9, 10, 9, 8, 10, 12]);
@@ -188,16 +189,17 @@ const saveData = () => {
 
     return () => clearInterval(intervalId);
   }, []);
+// Đổi trang
 
   return (
     <styles.DashboardRoot>
     {/* Header */}
       <styles.Webheadercontainer>
-          <styles.Dashboard2>Dashboard</styles.Dashboard2>
+          <styles.Dashboard2 style={{cursor: 'default'}}>Dashboard</styles.Dashboard2>
           <styles.AddgardenContainer>
             <styles.Addgardenitems>
               <styles.Icongarden alt="" src="/icongarden.svg" />
-              <styles.TextAddGarden>Thêm vườn</styles.TextAddGarden>
+              <styles.TextAddGarden style={{cursor: 'default'}}>Thêm vườn</styles.TextAddGarden>
               <styles.Iconaddgarden alt="" src="/add.png" onClick={showModal} />
                 {/* Hiển thị modal khi modalVisible là true */}
                 {modalVisible && (
@@ -243,7 +245,7 @@ const saveData = () => {
                   style={{
                     padding: '11px',
                     color: '#056C09',
-                    marginLeft: '45px',
+                    marginLeft: '25px',
                     fontSize: '23px',
                     border: '1px solid #fff',
                     borderRadius: '5px',
@@ -269,11 +271,11 @@ const saveData = () => {
 
           <styles.ContainerInfoUser>          
             <styles.Nametext>
-              <styles.Hello>Hello,</styles.Hello>
-              <styles.NguynTrBo> Nguyễn Trà Bảo Ngân</styles.NguynTrBo>
+              <styles.Hello style={{cursor: 'default'}}>Hello,</styles.Hello>
+              <styles.NguynTrBo style={{cursor: 'default'}}> Nguyễn Trà Bảo Ngân</styles.NguynTrBo>
             </styles.Nametext>
 
-            <styles.Locatetext>Dĩ An, Bình Dương</styles.Locatetext>
+            <styles.Locatetext style={{cursor: 'default'}}>Dĩ An, Bình Dương</styles.Locatetext>
           </styles.ContainerInfoUser>
         </styles.Userinfocontainer>
 
@@ -324,14 +326,16 @@ const saveData = () => {
         <styles.Taskbar />
         <styles.ItemAboutUs>
           <styles.IconAboutUs alt="" src="/icon-about-us.svg" />
-          <styles.AboutUs>About us</styles.AboutUs>
+          <styles.AboutUs style={{ cursor: 'default'}} >About us</styles.AboutUs>
         </styles.ItemAboutUs>
         <styles.ItemAllGardens>
-          <styles.TtCKhu>Tất cả khu vườn</styles.TtCKhu>
+          <Link to="/all-gardens">
+            <styles.TtCKhu style={{ cursor: 'default', color: '#FFF'}}>Tất cả khu vườn</styles.TtCKhu>
+          </Link>
           <styles.IconAllGardern alt="" src="/icon-all-gardern.svg" />
         </styles.ItemAllGardens>
         <styles.ItemDashboard>
-          <styles.Dashboard1>Dashboard</styles.Dashboard1>
+          <styles.Dashboard1 style={{ cursor: 'default', color: '#24FF00'}}>Dashboard</styles.Dashboard1>
           <styles.DashboardIcon alt="" src="/dashboard.svg" />
         </styles.ItemDashboard>
         <styles.Plantaholic>Plantaholic</styles.Plantaholic>
