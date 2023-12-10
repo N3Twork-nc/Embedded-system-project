@@ -2,8 +2,6 @@ import { IPSERVER } from "."
 import axios from "axios";
 
 export const getDataGarden = async (idGraden,type,interval,token) => {
- 
-
   const response = await axios.get(IPSERVER+`APIGetDataGarden?idGarden=${idGraden}&type=${type}&interval=${interval}`,{
     headers: {
       Authorization: `Bearer ${token}`
