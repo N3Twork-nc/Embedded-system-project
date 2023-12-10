@@ -127,7 +127,7 @@ const [showEditModal, setShowEditModal] = useState(false);
           <styles.IconAllGardern alt="" src="/icon-all-gardern.svg" />
         </styles.ItemAllGardens>
         <styles.ItemDashboard>
-          <Link to="/">
+          <Link to="/dashboard">
              <styles.Dashboard1 style={{ cursor: 'default', color: '#FFF'}}>Dashboard</styles.Dashboard1>
           </Link>
           <styles.DashboardIcon alt="" src="/dashboard.svg" />

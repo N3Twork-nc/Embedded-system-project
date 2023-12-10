@@ -47,8 +47,9 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/" element={<Dashboard />} />
+      <Route path="/" element={<Login />} />
       <Route path="/all-gardens" element={<AllGarden />} />
+      <Route path="/dashboard" element={<Dashboard />} />
     </Routes>
   );
 }

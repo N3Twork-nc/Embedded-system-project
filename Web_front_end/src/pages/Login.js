@@ -1,6 +1,6 @@
 import React, {useState, useEffect } from 'react';
 import * as styles from './styleLogin';
-
+import { Link } from 'react-router-dom';
 const Login = () => {
   return (
     <styles.LoginRoot>
@@ -28,8 +28,10 @@ const Login = () => {
           <styles.Remember> Remember me</styles.Remember>
           <styles.Forgot>Forgot password?</styles.Forgot>
         </styles.ForgotCon>
-
-        <styles.LoginButton>Login</styles.LoginButton>
+        <Link to='/dashboard'>
+          <styles.LoginButton>Login</styles.LoginButton>
+        </Link>
+        
 
       </styles.TableLogin>
       <styles.ImgLeft alt="" src="/cover.jpg" />
