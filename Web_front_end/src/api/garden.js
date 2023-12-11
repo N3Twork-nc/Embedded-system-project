@@ -45,4 +45,30 @@ export const myGarden = async (gardenName, location, cropType, token) => {
     return error;
   }
 };
+export const getDetailGardens = async (token) => {
+  try {
+    const response = await axios.get(IPSERVER + "APIGetDetailGarden",
+    {headers: {
+      Authorization:`Bearer ${token}`}
+    });
+    
+    const detail = response.data;
+    
+    const saving = [];
+    
+    Object.entries(detail).forEach(([gardenId, gardenInfo]) => {
+      const croptype = gardenInfo.CropType;
+      const gardenname = gardenInfo.NameGarden;
+      const location = gardenInfo.location;
+      const time = gardenInfo.timeUpload;
+    
+      saving.push({ gardenId, croptype, gardenname, location, time });
+    });
 
+    console.log("Get detail gardens success");
+    return saving;
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+};
