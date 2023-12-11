@@ -1,10 +1,11 @@
 import React, {useState, useEffect } from 'react';
 import * as styles from './styleAllGarden.js';
-import { fonts } from '../../global.js'
-import { Link } from 'react-router-dom';
+import { fonts } from '../../global.js';
+import { Link,useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const AllGarden = () => {
-
+  const infoUser=useSelector(state=>state.infoUser);
 // Thêm vườn
 const [modalVisible, setModalVisible] = useState(false);
 const [tenVuon, setTenVuon] = useState('');
@@ -90,10 +91,10 @@ const [showEditModal, setShowEditModal] = useState(false);
           <styles.ContainerInfoUser>          
             <styles.Nametext>
               <styles.Hello style={{cursor: 'default'}}>Hello,</styles.Hello>
-              <styles.NguynTrBo style={{cursor: 'default'}}> Nguyễn Trà Bảo Ngân</styles.NguynTrBo>
+              <styles.NguynTrBo style={{cursor: 'default'}}> {infoUser.fullname}</styles.NguynTrBo>
             </styles.Nametext>
 
-            <styles.Locatetext style={{cursor: 'default'}}>Dĩ An, Bình Dương</styles.Locatetext>
+            <styles.Locatetext style={{cursor: 'default'}}>{infoUser.address}</styles.Locatetext>
           </styles.ContainerInfoUser>
         </styles.Userinfocontainer>
 
