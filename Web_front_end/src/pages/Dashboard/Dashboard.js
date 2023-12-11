@@ -41,28 +41,10 @@ const Dashboard = () => {
     const lightXData = generateXData(selectedLightRange);
     const soilXData = generateXData(selectedSoilRange);
    
-
-    const tempData = [{
-      x: tempXData,
-      y: tempYArray,
-      mode: "lines"
-    }];
-
-    const humidData = [{
-      x: humidXData,
-      y: humidYArray,
-      mode: "lines"
-    }];
-    const lightData = [{
-      x: lightXData,
-      y: lightYArray,
-      mode: "lines"
-    }];
-    const soilData = [{
-      x: soilXData,
-      y: soilYArray,
-      mode: "lines"
-    }];
+    const tempData = [{x: tempXData, y: tempYArray, mode: "lines"}];
+    const humidData = [{x: humidXData, y: humidYArray, mode: "lines"}];
+    const lightData = [{x: lightXData, y: lightYArray, mode: "lines"}];
+    const soilData = [{x: soilXData, y: soilYArray, mode: "lines"}];
 
     const tempLayout = {
       xaxis: {
@@ -278,11 +260,11 @@ const saveData = () => {
 
           <styles.ContainerInfoUser>          
             <styles.Nametext>
-              <styles.Hello style={{cursor: 'default'}}>Hello,</styles.Hello>
-              <styles.NguynTrBo style={{cursor: 'default'}}> Nguyễn Trà Bảo Ngân</styles.NguynTrBo>
+              <styles.Hello style={{cursor: 'default'}}>Hello, </styles.Hello>
+              <styles.NguynTrBo style={{cursor: 'default'}}>{infoUser.fullname}</styles.NguynTrBo>
             </styles.Nametext>
 
-            <styles.Locatetext style={{cursor: 'default'}}>Dĩ An, Bình Dương</styles.Locatetext>
+            <styles.Locatetext style={{cursor: 'default'}}>{infoUser.address}</styles.Locatetext>
           </styles.ContainerInfoUser>
         </styles.Userinfocontainer>
 
