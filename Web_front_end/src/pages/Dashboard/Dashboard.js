@@ -7,8 +7,11 @@ import { myGarden, getDetailGardens } from '../../api/garden.js'
 import { Link,useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { getDataGarden } from '../../api/garden.js';
+import MQTT from "../../mqtt"
 
 const Dashboard = () => {
+  const dataMQTT=useSelector(state=>state.dataMQTT)
+  console.log(dataMQTT)
   const infoUser=JSON.parse(useSelector(state=>state.infoUser))
   const Authentication=JSON.parse(useSelector(state=>state.auth))
   const isLoggedIn=Authentication.isLoggedIn
@@ -17,6 +20,7 @@ const Dashboard = () => {
   const [gardenOptions, setGardenOptions] = useState([]);
 
   useEffect(() => {  
+    const mqttClient=new MQTT(infoUser.username,"20231211165037135375")
     savedGarden();
    }, []);
  
@@ -302,7 +306,7 @@ const saveData = async () => {
         <styles.Soilboxcontainer>
           <styles.Boxgardenname />
           <styles.Itemsoil>
-            <styles.Soiltext>65%</styles.Soiltext>
+            <styles.Soiltext>{dataMQTT.moisture}%</styles.Soiltext>
             <styles.Iconsoil alt="" src="/iconsoil@2x.png" />
           </styles.Itemsoil>
           <styles.Soiltitle>Độ ẩm đất</styles.Soiltitle>
@@ -311,7 +315,7 @@ const saveData = async () => {
         <styles.Airboxcontainer>
           <styles.Boxgardenname />
           <styles.Itemair>
-            <styles.Airtext>65%</styles.Airtext>
+            <styles.Airtext>{dataMQTT.humidity}%</styles.Airtext>
             <styles.Iconair alt="" src="/iconair@2x.png" />
           </styles.Itemair>
           <styles.Airtitle>Độ ẩm không khí</styles.Airtitle>
@@ -320,7 +324,7 @@ const saveData = async () => {
         <styles.Lightboxcontainer>
           <styles.Boxgardenname />
           <styles.Itemlight>
-            <styles.Lighttext>65%</styles.Lighttext>
+            <styles.Lighttext>{dataMQTT.light}%</styles.Lighttext>
             <styles.Iconlight alt="" src="/iconlight@2x.png" />
             <styles.Lighttitle>Ánh sáng</styles.Lighttitle>
           </styles.Itemlight>
@@ -329,7 +333,7 @@ const saveData = async () => {
         <styles.Tempboxcontainer>
           <styles.Boxgardenname />
           <styles.Itemtemp>
-            <styles.Temptext>30°C</styles.Temptext>
+            <styles.Temptext>{dataMQTT.temperature}°C</styles.Temptext>
             <styles.Icontemp alt="" src="/icontemp@2x.png" />
           </styles.Itemtemp>
           <styles.Temptitle>Nhiệt độ</styles.Temptitle>
