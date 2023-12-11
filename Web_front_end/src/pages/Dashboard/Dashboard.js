@@ -218,6 +218,9 @@ const saveData = async () => {
     <styles.DashboardRoot>
     {/* Header */}
       <styles.Webheadercontainer>
+      <styles.IDcontainer>
+           <styles.ID>ID vườn: 12345678910201023231</styles.ID>
+        </styles.IDcontainer>
           <styles.Dashboard2 style={{cursor: 'default'}}>Dashboard</styles.Dashboard2>
           <styles.AddgardenContainer>
             <styles.Addgardenitems>
@@ -282,6 +285,8 @@ const saveData = async () => {
                   ))} 
                 </select>
         </styles.Gardennamecontainer>
+
+
 
         <styles.Timecontainer>
            <styles.Hour>{currentHour}</styles.Hour>
