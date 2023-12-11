@@ -2,18 +2,11 @@ import {createSlice} from "@reduxjs/toolkit"
 
 const infoUser=createSlice({
     name:"infoUser",
-    initialState:{
-        "username":"",
-        "password":"",
-        "email":"",
-        "fullname":"",
-        "gender": "",
-        "phoneNumber": "",
-        "address": ""
-    },
+    initialState:localStorage.getItem("infoUser"),
     reducers:{
         updateInfoUser(state,data){
             state=data.payload
+            localStorage.setItem("infoUser",data.payload)
             return state
         },
 
@@ -25,6 +18,7 @@ const infoUser=createSlice({
             state.gender = "";
             state.phoneNumber = "";
             state.address = "";
+            
         },
     }
 })

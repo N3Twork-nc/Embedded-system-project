@@ -6,6 +6,7 @@ import { format } from 'date-fns';
 import { myGarden, getDetailGardens } from '../../api/garden.js'
 import { Link,useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { getDataGarden } from '../../api/garden.js';
 
 const Dashboard = () => {
   const infoUser=useSelector(state=>state.infoUser)
@@ -29,8 +30,6 @@ const Dashboard = () => {
       console.log(error);
     }
   };
-  
-  console.log(isAuth)
   const [tempYArray, setTempYArray] = useState([1, 2, 4, 5, 6, 4, 8, 9, 10, 9, 10, 9, 8, 10, 12, 8, 6, 5, 8, 7, 7, 7, 7, 9, 10, 9, 10, 9, 8, 10, 12]);
   const [humidYArray, setHumidYArray] = useState([2, 3, 5, 6, 7, 5, 9, 10, 11, 10, 11, 10, 9, 11, 13, 9, 7, 6, 9, 8, 8, 8, 8, 10, 11, 10, 11, 10, 9, 11, 13]);
   const [lightYArray, setLightYArray] = useState([2, 3, 5, 6, 7, 5, 9, 10, 11, 10, 11, 10, 9, 11, 13, 9, 7, 6, 9, 8, 8, 8, 8, 10, 11, 10, 11, 10, 9, 11, 13]);
@@ -115,8 +114,11 @@ const Dashboard = () => {
     Plotly.newPlot("soilChart", soilData, soilLayout);
   }, [tempYArray, humidYArray, lightYArray, soilYArray, selectedTempRange, selectedHumidRange, selectedLightRange, selectedSoilRange]);
 
-  const handleTempDropdownChange = (event) => {
+  
+  const  handleTempDropdownChange = async (event) => {
     setSelectedTempRange(event.target.value);
+    const data=getDataGarden(idGarden,token);
+    console.log(data)
   };
 
   const handleHumidDropdownChange = (event) => {
