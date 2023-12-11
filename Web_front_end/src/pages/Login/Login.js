@@ -15,6 +15,10 @@ const Login = () => {
   const info = useSelector(state=>state.infoUser);  
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
+  const handleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
   
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
@@ -56,22 +60,29 @@ const Login = () => {
 
         <styles.EmailContainer>
           <styles.TitleEmail>Email hoặc username</styles.TitleEmail> 
-          <styles.InputEmail
-            type="text"
-            placeholder="Nhập email hoặc username"
-            value={username}
-            onChange={handleUsernameChange}
-          />
+          <styles.InputEmailCon>
+            <styles.ImgMail alt="" src="/email.png" />
+                <styles.InputEmail
+                  type="text"
+                  placeholder="Nhập email hoặc username"
+                  value={username}
+                  onChange={handleUsernameChange}
+                />
+            </styles.InputEmailCon>
         </styles.EmailContainer>
 
         <styles.PassContainer>
           <styles.TitlePass>Mật khẩu</styles.TitlePass> 
-          <styles.InputPass
-            type="text"
-            placeholder="Nhập vào mật khẩu"
-            value={password}
-            onChange={handlePasswordChange}
-          />
+            <styles.InputPassCon> 
+                <styles.ImgPass alt="" src="/pass.png" />
+                <styles.InputPass
+                  type={showPassword ? 'text' : 'password'}
+                  placeholder="Nhập vào mật khẩu"
+                  value={password}
+                  onChange={handlePasswordChange}
+                />
+              <styles.Show onClick={handleShowPassword}> {showPassword ? 'Hide' : 'Show'}</styles.Show>
+            </styles.InputPassCon>
         </styles.PassContainer>
 
         <styles.ForgotCon>

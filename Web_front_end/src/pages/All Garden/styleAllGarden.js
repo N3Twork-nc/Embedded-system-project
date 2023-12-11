@@ -377,7 +377,7 @@ export const Dashboard2 = styled.div`
   top: 10.53%;
   left: 0%;
   font-weight: 600;
-  display: inline-block;
+  display: inline-block;z
 `;
 
 export const Icongarden = styled.img`

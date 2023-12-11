@@ -849,6 +849,7 @@ export const Dashboard2 = styled.div`
   left: 0%;
   font-weight: 600;
   display: inline-block;
+  font-family: 'Roboto'; 
 `;
 
 export const Icongarden = styled.img`
