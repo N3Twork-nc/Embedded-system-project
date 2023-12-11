@@ -49,18 +49,22 @@ export const TitleEmail = styled.div`
     font-family: 'Roboto'; 
 `;
 export const InputEmail = styled.input`
-    margin-top: 1%;
+    margin-top: 0.2%;
     background-color: #EBFFE2;
-    height: 55%;
-    width: 80%;
     position: absolute;
-    height: 70%;
-    width: 100%;
+    height: 75%;
+    width: 85%;
+    left: 10%;
     border-radius: 10px;
     font-size: 20px;
     font-family: 'Roboto';  
-    padding-left: 17px;
+    padding-left: 15px;
     border: none;
+    &:focus {
+      outline: none; 
+      box-shadow: none; 
+      border: none; 
+  }
 `;
 
 // export const ImgMail = styled.img`
@@ -86,16 +90,19 @@ export const TitlePass = styled.div`
 export const InputPass = styled.input`
     border: none; 
     background-color: #EBFFE2;
-    height: 55%;
-    width: 80%;
+    height: 75%;
+    width: 85%;
+    left: 10%;
     position: absolute;
-    height: 70%;
-    width: 100%;
     border-radius: 10px;
     font-size: 20px;
     font-family: 'Roboto'; 
     padding-left: 17px;
-    margin-top: 1%;
+    &:focus {
+      outline: none; 
+      box-shadow: none; 
+      border: none; 
+  }
 `;
 export const ForgotCon = styled.div`
     font-family: 'Roboto'; 
@@ -134,4 +141,56 @@ export const LoginButton = styled.button`
   margin-top: 23px; 
   margin-left: 10%;
   font-weight: 700;
+`;
+export const InputEmailCon = styled.div`
+  margin-top: 1%;
+  height: 30%;
+  width: 110%;
+  height: 80%;
+  width: 100%;
+  border-radius: 10px;
+  background-color: #EBFFE2;
+  border: none;
+`;
+export const ImgMail = styled.img`
+  position: absolute;
+  z-index:1;
+  top: 50%;
+  left: 2%;
+  width: 10%;
+  height: 40%;
+  object-fit: cover;
+`;
+
+export const InputPassCon = styled.div`
+  margin-top: 1%;
+  height: 30%;
+  width: 110%;
+  height: 80%;
+  width: 100%;
+  border-radius: 10px;
+  background-color: #EBFFE2;
+  border: none;
+  border-radius: 10px;
+
+`;
+export const ImgPass = styled.img`
+  position: absolute;
+  z-index:1;
+  top: 50%;
+  left: 2%;
+  width: 10%;
+  height: 40%;
+  object-fit: cover;
+`;
+export const Show = styled.button`
+  position: absolute;
+  z-index:1;
+  top: 50%;
+  left: 90%;
+  width: 10%;
+  background-color: #EBFFE2;
+  color: #166D29;
+  height: 40%;
+  border: none;
 `;
