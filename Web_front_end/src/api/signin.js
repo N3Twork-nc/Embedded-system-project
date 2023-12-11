@@ -7,10 +7,14 @@ export const signin = async (username, password) => {
       username: username,
       password: password
     });
-
-    return response.data;
+    const info=response.data['info'];
+    const token = response.data['token'];
+    const status = response.status;
+    console.log(status)
+    return {status,token,info};
   } catch (error) {
-    // Xử lý lỗi ở đây nếu cần
-    console.error('Error while signing in:', error);
+    const status=error.response.status
+    console.log(status)
+    return {status,token:"null",info:'null'};
   }
 };

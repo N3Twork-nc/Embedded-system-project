@@ -1,6 +1,6 @@
 import {createSlice} from "@reduxjs/toolkit"
 
-gardenReducer=createSlice({
+const gardenReducer=createSlice({
     name:"Garden",
     initialState:{'payload':[]},
     reducers:{

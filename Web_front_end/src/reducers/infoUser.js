@@ -1,6 +1,6 @@
 import {createSlice} from "@reduxjs/toolkit"
 
-infoUser=createSlice({
+const infoUser=createSlice({
     name:"infoUser",
     initialState:{
         "username":"",
@@ -12,12 +12,12 @@ infoUser=createSlice({
         "address": ""
     },
     reducers:{
-        updateAll(state,data){
+        updateInfoUser(state,data){
             state=data.payload
             return state
         },
 
-        deleteAll(state, action) {
+        deleteInfoUser(state, action) {
             state.username = "";
             state.password = "";
             state.email = "";
@@ -30,5 +30,5 @@ infoUser=createSlice({
 })
 
 export const {actions,reducer} =infoUser
-export const {updateAll, deleteAll}=actions
+export const {updateInfoUser, deleteInfoUser}=actions
 export default reducer

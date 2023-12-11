@@ -1,16 +1,15 @@
 import { configureStore} from "@reduxjs/toolkit"
 import infoUserReducer from "../reducers/infoUser"
-import tokenReducer from "../reducers/token"
+import authReducer from "../reducers/auth"
 import gardenReducer from "../reducers/mygarden"
-
 const rootReducer={
     infoUser: infoUserReducer,
-    token: tokenReducer,
-    garden:gardenReducer
+    garden:gardenReducer,
+    auth:authReducer,
 }
 
 const store=configureStore({
-    reducer:rootReducer
+    reducer:rootReducer,
 })
 
 export default store
