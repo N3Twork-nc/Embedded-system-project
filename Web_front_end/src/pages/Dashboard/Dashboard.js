@@ -10,7 +10,8 @@ import { getDataGarden } from '../../api/garden.js';
 
 const Dashboard = () => {
   const infoUser=useSelector(state=>state.infoUser)
-  const isAuth=useSelector(state=>state.auth)["isLoggedIn"]
+  console.log(infoUser)
+  const isAuth= useSelector(state=>state.auth)["isLoggedIn"]
   const token=useSelector(state=>state.auth)["token"]["payload"]
   console.log(isAuth)
   const [tempYArray, setTempYArray] = useState([1, 2, 4, 5, 6, 4, 8, 9, 10, 9, 10, 9, 8, 10, 12, 8, 6, 5, 8, 7, 7, 7, 7, 9, 10, 9, 10, 9, 8, 10, 12]);

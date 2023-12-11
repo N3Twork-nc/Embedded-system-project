@@ -1,20 +1,16 @@
-import React, {useState, useEffect, } from 'react';
+import React, {useState, useEffect } from 'react';
 import * as styles from './styleLogin.js';
-import { Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { signin } from '../../api/signin.js';
 import { useDispatch } from "react-redux"
-import { loginSuccess } from '../../reducers/auth.js';
+import {updateToken} from "../../reducers/token"
 import {updateInfoUser} from "../../reducers/infoUser"
-import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const dispatch = useDispatch();
-  const info = useSelector(state=>state.infoUser);  
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const navigate = useNavigate();
+  const dispatch=useDispatch()
   
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
@@ -28,26 +24,23 @@ const Login = () => {
     try {
       const response = await signin(username, password);
       if (response['status']=="200"){
-        // setIsLoading(false);
-        const auth=loginSuccess(response['token'])
+        setIsLoading(false);
+        const acUpdateToken=updateToken(response['token'])
         const acUpdateInfo=updateInfoUser(response['info'])
-        dispatch(auth)
+        dispatch(acUpdateToken)
         dispatch(acUpdateInfo)
-        navigate('/dashboard')
+        // return navigation.navigate('Home')
       }
       else 
       {
-        alert('Tài khoản hoặc mật khẩu không chính xác!')
+        // Alert.alert('Tài khoản hoặc mật khẩu không chính xác');
+        // setIsLoading(false);
+        // return navigation.navigate('SignIn')
       }
     } catch (error) {
       console.error('Error while signing in:', error);
-      alert('Quá trình đăng nhập đã xảy ra lỗi')
     }
   };
-
-  useEffect(() => {
-    document.title = 'Trang đăng nhập';
-  }, []);
 
   return (
     <styles.LoginRoot>
@@ -79,7 +72,7 @@ const Login = () => {
           <styles.Remember> Remember me</styles.Remember>
           <styles.Forgot>Forgot password?</styles.Forgot>
         </styles.ForgotCon>
-        <Link>
+        <Link to='/dashboard'>
           <styles.LoginButton onClick={handleSignIn}>Login</styles.LoginButton>
         </Link>
         
