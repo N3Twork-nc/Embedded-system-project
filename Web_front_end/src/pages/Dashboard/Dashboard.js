@@ -170,8 +170,6 @@ const saveData = async () => {
   };
 };
 
-
-
   // nhấn nút bật tắt thiết bị
   const [shiftedLight, setShiftedLight] = useState(false);
   const [shiftedWater, setShiftedWater] = useState(false);
