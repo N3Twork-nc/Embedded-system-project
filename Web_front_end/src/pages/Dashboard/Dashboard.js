@@ -6,6 +6,7 @@ import { format } from 'date-fns';
 import { myGarden, getDetailGardens } from '../../api/garden.js'
 import { Link,useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { getDataGarden } from '../../api/garden.js';
 
 const Dashboard = () => {
   const infoUser=useSelector(state=>state.infoUser)
@@ -115,8 +116,11 @@ const Dashboard = () => {
     Plotly.newPlot("soilChart", soilData, soilLayout);
   }, [tempYArray, humidYArray, lightYArray, soilYArray, selectedTempRange, selectedHumidRange, selectedLightRange, selectedSoilRange]);
 
-  const handleTempDropdownChange = (event) => {
+  
+  const  handleTempDropdownChange = async (event) => {
     setSelectedTempRange(event.target.value);
+    const data=getDataGarden(idGarden,token);
+    console.log(data)
   };
 
   const handleHumidDropdownChange = (event) => {
