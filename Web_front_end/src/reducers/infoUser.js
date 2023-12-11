@@ -29,6 +29,6 @@ const infoUser=createSlice({
     }
 })
 
-export const {actions,reducer} =infoUser
+export const {actions, reducer} = infoUser
 export const {updateInfoUser, deleteInfoUser}=actions
 export default reducer
