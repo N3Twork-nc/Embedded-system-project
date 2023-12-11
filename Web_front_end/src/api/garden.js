@@ -7,9 +7,10 @@ export const getDataGarden = async (idGraden,type,interval,token) => {
       Authorization: `Bearer ${token}`
     }
   });
-  JSON.parse(response.data)
-  keys=[]
-  values=[]
+  // JSON.parse(response.data)
+  var keys=[]
+  var values=[]
+  const data=response.data["Data"]
   for (var key in data) {
     if (data.hasOwnProperty(key)) {
       keys.push(key)
@@ -18,6 +19,7 @@ export const getDataGarden = async (idGraden,type,interval,token) => {
     }
   }
   return {keys,values}
+  // return response.data["Data"]
 };
 
 export const myGarden = async (gardenName, location, cropType, token) => {
@@ -45,7 +47,6 @@ export const myGarden = async (gardenName, location, cropType, token) => {
     return error;
   }
 };
-
 export const getDetailGardens = async (token) => {
   try {
     const response = await axios.get(IPSERVER + "APIGetDetailGarden",

@@ -1,19 +1,17 @@
-import React, {useState, useEffect, } from 'react';
+import React, {useState, useEffect } from 'react';
 import * as styles from './styleLogin.js';
-import { Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { signin } from '../../api/signin.js';
 import { useDispatch } from "react-redux"
-import { loginSuccess } from '../../reducers/auth.js';
 import {updateInfoUser} from "../../reducers/infoUser"
-import { useSelector } from 'react-redux';
+import { loginSuccess} from "../../reducers/auth.js"
 import { useNavigate } from 'react-router-dom';
 
+
 const Login = () => {
+  const dispatch=useDispatch()
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const dispatch = useDispatch();
-  const info = useSelector(state=>state.infoUser);  
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const handleShowPassword = () => {
@@ -32,26 +30,21 @@ const Login = () => {
     try {
       const response = await signin(username, password);
       if (response['status']=="200"){
-        // setIsLoading(false);
-        const auth=loginSuccess(response['token'])
         const acUpdateInfo=updateInfoUser(response['info'])
-        dispatch(auth)
+        const login=loginSuccess(response['token'])
+        dispatch(login)
         dispatch(acUpdateInfo)
         navigate('/dashboard')
       }
       else 
       {
-        alert('Tài khoản hoặc mật khẩu không chính xác!')
+        alert('Tài khoản hoặc mật khẩu không chính xác');
       }
     } catch (error) {
+      alert('Quá tinh đăng nhập đã xảy ra lỗi');
       console.error('Error while signing in:', error);
-      alert('Quá trình đăng nhập đã xảy ra lỗi')
     }
   };
-
-  useEffect(() => {
-    document.title = 'Trang đăng nhập';
-  }, []);
 
   return (
     <styles.LoginRoot>

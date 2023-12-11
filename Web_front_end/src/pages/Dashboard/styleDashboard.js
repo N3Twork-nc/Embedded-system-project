@@ -1193,3 +1193,25 @@ export const SoilGraph = styled.div`
   align-items: flex-start;
   justify-content: flex-start;
 `;
+
+export const ID = styled.div`
+  position: absolute;
+  width: 70%;
+  top: 24.53%;
+  left: 5%;
+  display: inline-block;
+  font-family: var(--font-roboto);
+  font-size: 20px;
+  color: var(--color-darkgreen-100);
+  font-weight: 500;
+`;
+export const IDcontainer = styled.div`
+  position: absolute;
+  height: 71.62%;
+  width: 29%;
+  top: 13.51%;
+  bottom: 14.86%;
+  left: 43%;
+  background-color: var(--white);
+  border-radius: 13px; 
+`;
