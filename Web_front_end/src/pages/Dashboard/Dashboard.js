@@ -4,6 +4,7 @@ import Plotly from 'plotly.js-dist';
 import { fonts } from '../../global.js'
 import { format } from 'date-fns';
 import { Link } from 'react-router-dom';
+import { myGarden } from '../../api/garden.js'
 
 const Dashboard = () => {
   const [tempYArray, setTempYArray] = useState([1, 2, 4, 5, 6, 4, 8, 9, 10, 9, 10, 9, 8, 10, 12, 8, 6, 5, 8, 7, 7, 7, 7, 9, 10, 9, 10, 9, 8, 10, 12]);
@@ -162,10 +163,24 @@ const hideModal = () => {
   setModalVisible(false);
 };
 
-const saveData = () => {
-  console.log(`Tên vườn: ${tenVuon}, Vị trí: ${viTri}, Cây trồng: ${cayTrong}`);
-  hideModal();
+const saveData = async () => {
+  try {
+    const gardenName = tenVuon; 
+    const location = viTri; 
+    const cropType = cayTrong;
+    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDI1MzAxOTksInVzZXJuYW1lIjoiTiJ9.-UCJafhaOKKMlE4BbP9Ntq3NIgwRmCByFnmtkjRCxYk'; 
+
+    // Gọi hàm myGarden
+    const response = await myGarden(gardenName, location, cropType, token);
+
+    console.log('Result:', response);
+    hideModal(); 
+  } catch(error) {
+    console.error('Error:', error);
+    hideModal(); 
+  };
 };
+
 
 
   // nhấn nút bật tắt thiết bị
