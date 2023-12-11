@@ -30,6 +30,7 @@ const Dashboard = () => {
       console.log(error);
     }
   };
+
   const [tempYArray, setTempYArray] = useState([1, 2, 4, 5, 6, 4, 8, 9, 10, 9, 10, 9, 8, 10, 12, 8, 6, 5, 8, 7, 7, 7, 7, 9, 10, 9, 10, 9, 8, 10, 12]);
   const [humidYArray, setHumidYArray] = useState([2, 3, 5, 6, 7, 5, 9, 10, 11, 10, 11, 10, 9, 11, 13, 9, 7, 6, 9, 8, 8, 8, 8, 10, 11, 10, 11, 10, 9, 11, 13]);
   const [lightYArray, setLightYArray] = useState([2, 3, 5, 6, 7, 5, 9, 10, 11, 10, 11, 10, 9, 11, 13, 9, 7, 6, 9, 8, 8, 8, 8, 10, 11, 10, 11, 10, 9, 11, 13]);
@@ -220,6 +221,9 @@ const saveData = async () => {
     <styles.DashboardRoot>
     {/* Header */}
       <styles.Webheadercontainer>
+      <styles.IDcontainer>
+           <styles.ID>ID vườn: 12345678910201023231</styles.ID>
+        </styles.IDcontainer>
           <styles.Dashboard2 style={{cursor: 'default'}}>Dashboard</styles.Dashboard2>
           <styles.AddgardenContainer>
             <styles.Addgardenitems>
@@ -284,6 +288,8 @@ const saveData = async () => {
                   ))} 
                 </select>
         </styles.Gardennamecontainer>
+
+
 
         <styles.Timecontainer>
            <styles.Hour>{currentHour}</styles.Hour>
