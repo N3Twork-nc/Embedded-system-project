@@ -3,6 +3,7 @@ import * as styles from './styleDashboard';
 import Plotly from 'plotly.js-dist';
 import { fonts } from '../../global.js'
 import { format } from 'date-fns';
+import { myGarden } from '../../api/garden.js'
 import { Link,useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { getDataGarden } from '../../api/garden.js';
@@ -43,28 +44,10 @@ const Dashboard = () => {
     const lightXData = generateXData(selectedLightRange);
     const soilXData = generateXData(selectedSoilRange);
    
-
-    const tempData = [{
-      x: tempXData,
-      y: tempYArray,
-      mode: "lines"
-    }];
-
-    const humidData = [{
-      x: humidXData,
-      y: humidYArray,
-      mode: "lines"
-    }];
-    const lightData = [{
-      x: lightXData,
-      y: lightYArray,
-      mode: "lines"
-    }];
-    const soilData = [{
-      x: soilXData,
-      y: soilYArray,
-      mode: "lines"
-    }];
+    const tempData = [{x: tempXData, y: tempYArray, mode: "lines"}];
+    const humidData = [{x: humidXData, y: humidYArray, mode: "lines"}];
+    const lightData = [{x: lightXData, y: lightYArray, mode: "lines"}];
+    const soilData = [{x: soilXData, y: soilYArray, mode: "lines"}];
 
     const tempLayout = {
       xaxis: {
@@ -174,11 +157,23 @@ const hideModal = () => {
   setModalVisible(false);
 };
 
-const saveData = () => {
-  console.log(`Tên vườn: ${tenVuon}, Vị trí: ${viTri}, Cây trồng: ${cayTrong}`);
-  hideModal();
-};
+const saveData = async () => {
+  try {
+    const gardenName = tenVuon; 
+    const location = viTri; 
+    const cropType = cayTrong;
+    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDI1MzAxOTksInVzZXJuYW1lIjoiTiJ9.-UCJafhaOKKMlE4BbP9Ntq3NIgwRmCByFnmtkjRCxYk'; 
 
+    // Gọi hàm myGarden
+    const response = await myGarden(gardenName, location, cropType, token);
+
+    console.log('Result:', response);
+    hideModal(); 
+  } catch(error) {
+    console.error('Error:', error);
+    hideModal(); 
+  };
+};
 
   // nhấn nút bật tắt thiết bị
   const [shiftedLight, setShiftedLight] = useState(false);
@@ -283,11 +278,11 @@ const saveData = () => {
 
           <styles.ContainerInfoUser>          
             <styles.Nametext>
-              <styles.Hello style={{cursor: 'default'}}>Hello,</styles.Hello>
-              <styles.NguynTrBo style={{cursor: 'default'}}> Nguyễn Trà Bảo Ngân</styles.NguynTrBo>
+              <styles.Hello style={{cursor: 'default'}}>Hello, </styles.Hello>
+              <styles.NguynTrBo style={{cursor: 'default'}}>{infoUser.fullname}</styles.NguynTrBo>
             </styles.Nametext>
 
-            <styles.Locatetext style={{cursor: 'default'}}>Dĩ An, Bình Dương</styles.Locatetext>
+            <styles.Locatetext style={{cursor: 'default'}}>{infoUser.address}</styles.Locatetext>
           </styles.ContainerInfoUser>
         </styles.Userinfocontainer>
 

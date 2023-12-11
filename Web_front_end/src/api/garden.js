@@ -19,3 +19,30 @@ export const getDataGarden = async (idGraden,type,interval,token) => {
   }
   return {keys,values}
 };
+
+export const myGarden = async (gardenName, location, cropType, token) => {
+  try {
+    const data = {
+        "name_garden": `${gardenName}`,
+        "location": `${location}`,
+        "cropType": `${cropType}`
+    };
+
+    const response = await axios.put(IPSERVER + 'APIUploadMyGarden', data, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+
+    if (response.status == 200) {
+      return "Successful";
+    } else {
+      return "Failure";
+    }
+
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+};
+
