@@ -3,13 +3,34 @@ import * as styles from './styleDashboard';
 import Plotly from 'plotly.js-dist';
 import { fonts } from '../../global.js'
 import { format } from 'date-fns';
-import { myGarden } from '../../api/garden.js'
+import { myGarden, getDetailGardens } from '../../api/garden.js'
 import { Link,useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { getDataGarden } from '../../api/garden.js';
 
 const Dashboard = () => {
   const infoUser=useSelector(state=>state.infoUser)
   const isAuth=useSelector(state=>state.auth)["isLoggedIn"]
+  const token=useSelector(state=>state.auth)["token"]["payload"]
+  const [gardensData, setgardensData] = useState([]);
+  const [gardenOptions, setGardenOptions] = useState([]);
+
+  useEffect(() => {  
+    savedGarden();
+   }, []);
+ 
+
+  const savedGarden = async () => {
+    try {
+      const gardenDetails = await getDetailGardens(token);
+      setgardensData(gardenDetails);
+      const action=updateMyGarden(gardenDetails)
+      dispatch(action)
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  
   console.log(isAuth)
   const [tempYArray, setTempYArray] = useState([1, 2, 4, 5, 6, 4, 8, 9, 10, 9, 10, 9, 8, 10, 12, 8, 6, 5, 8, 7, 7, 7, 7, 9, 10, 9, 10, 9, 8, 10, 12]);
   const [humidYArray, setHumidYArray] = useState([2, 3, 5, 6, 7, 5, 9, 10, 11, 10, 11, 10, 9, 11, 13, 9, 7, 6, 9, 8, 8, 8, 8, 10, 11, 10, 11, 10, 9, 11, 13]);
@@ -22,13 +43,14 @@ const Dashboard = () => {
   const [selectedGarden, setSelectedGarden] = useState('Vườn cà chua');
   const [currentHour, setCurrentHour] = useState('');
   const navigate=useNavigate()
-
-  const gardenOptions = [
-    'Vườn xà lách',
-    'Vườn cà chua',
-    'Vườn rau mầm',
-    // Thêm các tên vườn khác vào đây
-  ];
+  
+  useEffect(() => {
+    // Tạo một mảng mới chứa tên các khu vườn từ gardenDetails và cập nhật gardenOptions
+    if (gardensData && gardensData.length > 0) {
+      const gardenNames = gardensData.map((garden) => `Vườn ${garden.gardenname}`);
+      setGardenOptions([...gardenOptions, ...gardenNames]);
+    }
+  }, [gardensData]);
 
   const handleGardenChange = (event) => {
     setSelectedGarden(event.target.value);
@@ -94,8 +116,11 @@ const Dashboard = () => {
     Plotly.newPlot("soilChart", soilData, soilLayout);
   }, [tempYArray, humidYArray, lightYArray, soilYArray, selectedTempRange, selectedHumidRange, selectedLightRange, selectedSoilRange]);
 
-  const handleTempDropdownChange = (event) => {
+  
+  const  handleTempDropdownChange = async (event) => {
     setSelectedTempRange(event.target.value);
+    const data=getDataGarden(idGarden,token);
+    console.log(data)
   };
 
   const handleHumidDropdownChange = (event) => {
@@ -157,7 +182,7 @@ const saveData = async () => {
     const gardenName = tenVuon; 
     const location = viTri; 
     const cropType = cayTrong;
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDI1MzAxOTksInVzZXJuYW1lIjoiTiJ9.-UCJafhaOKKMlE4BbP9Ntq3NIgwRmCByFnmtkjRCxYk'; 
+    //const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDI1MzAxOTksInVzZXJuYW1lIjoiTiJ9.-UCJafhaOKKMlE4BbP9Ntq3NIgwRmCByFnmtkjRCxYk'; 
 
     // Gọi hàm myGarden
     const response = await myGarden(gardenName, location, cropType, token);

@@ -7,10 +7,18 @@ export const getDataGarden = async (idGraden,type,interval,token) => {
       Authorization: `Bearer ${token}`
     }
   });
-  console.log(response.data)
+  JSON.parse(response.data)
+  keys=[]
+  values=[]
+  for (var key in data) {
+    if (data.hasOwnProperty(key)) {
+      keys.push(key)
+      var value = data[key];
+      values.push(value);
+    }
+  }
+  return {keys,values}
 };
-
-getDataGarden("20231210185549269343","Temperature",1,"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDI0ODA3NTAsInVzZXJuYW1lIjoiQmFvbmdhbiJ9.ppfhhPLwi1X97nyxHwH1_iZJ73FzFbN0KaqFALAyXC4")
 
 export const myGarden = async (gardenName, location, cropType, token) => {
   try {
@@ -32,6 +40,34 @@ export const myGarden = async (gardenName, location, cropType, token) => {
       return "Failure";
     }
 
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+};
+
+export const getDetailGardens = async (token) => {
+  try {
+    const response = await axios.get(IPSERVER + "APIGetDetailGarden",
+    {headers: {
+      Authorization:`Bearer ${token}`}
+    });
+    
+    const detail = response.data;
+    
+    const saving = [];
+    
+    Object.entries(detail).forEach(([gardenId, gardenInfo]) => {
+      const croptype = gardenInfo.CropType;
+      const gardenname = gardenInfo.NameGarden;
+      const location = gardenInfo.location;
+      const time = gardenInfo.timeUpload;
+    
+      saving.push({ gardenId, croptype, gardenname, location, time });
+    });
+
+    console.log("Get detail gardens success");
+    return saving;
   } catch (error) {
     console.log(error);
     return error;
