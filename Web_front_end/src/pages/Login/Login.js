@@ -1,11 +1,21 @@
-import React, {useState, useEffect } from 'react';
-import * as styles from './styleLogin';
-import { Link } from 'react-router-dom';
-import { signin } from '../api/signin.js';
+import React, {useState, useEffect, } from 'react';
+import * as styles from './styleLogin.js';
+import { Link} from 'react-router-dom';
+import { signin } from '../../api/signin.js';
+import { useDispatch } from "react-redux"
+import { loginSuccess } from '../../reducers/auth.js';
+import {updateInfoUser} from "../../reducers/infoUser"
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const dispatch=useDispatch()
+  const info=useSelector(state=>state.infoUser)
+  
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate();
   
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
@@ -18,11 +28,27 @@ const Login = () => {
   const handleSignIn = async () => {
     try {
       const response = await signin(username, password);
-      // Nếu thành công, thực hiện đổi hướng hoặc các hành động khác
+      if (response['status']=="200"){
+        // setIsLoading(false);
+        const auth=loginSuccess(response['token'])
+        const acUpdateInfo=updateInfoUser(response['info'])
+        dispatch(auth)
+        dispatch(acUpdateInfo)
+        navigate('/dashboard')
+      }
+      else 
+      {
+        alert('Tài khoản hoặc mật khẩu không chính xác!')
+      }
     } catch (error) {
       console.error('Error while signing in:', error);
+      alert('Quá trình đăng nhập đã xảy ra lỗi')
     }
   };
+
+  useEffect(() => {
+    document.title = 'Trang đăng nhập';
+  }, []);
 
   return (
     <styles.LoginRoot>
@@ -54,7 +80,7 @@ const Login = () => {
           <styles.Remember> Remember me</styles.Remember>
           <styles.Forgot>Forgot password?</styles.Forgot>
         </styles.ForgotCon>
-        <Link to='/dashboard'>
+        <Link>
           <styles.LoginButton onClick={handleSignIn}>Login</styles.LoginButton>
         </Link>
         

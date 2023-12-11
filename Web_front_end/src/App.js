@@ -5,10 +5,11 @@ import {
   useNavigationType,
   useLocation,
 } from "react-router-dom";
-import Login from "./pages/Login";
+import Login from "./pages/Login/Login";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import AllGarden from "./pages/All Garden/allGarden";
-import * as y from "./api/garden";
+import store from "./store";
+import { Provider } from 'react-redux';
 
 function App() {
 
@@ -49,11 +50,13 @@ function App() {
   }, [pathname]);
 
   return (
-    <Routes>
-      <Route path="/" element={<Login />} />
-      <Route path="/all-gardens" element={<AllGarden />} />
-      <Route path="/dashboard" element={<Dashboard />} />
-    </Routes>
+    <Provider store={store}>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/all-gardens" element={<AllGarden />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+      </Routes>
+    </Provider>
   );
 }
 export default App;

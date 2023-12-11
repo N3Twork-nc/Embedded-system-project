@@ -3,10 +3,14 @@ import * as styles from './styleDashboard';
 import Plotly from 'plotly.js-dist';
 import { fonts } from '../../global.js'
 import { format } from 'date-fns';
-import { Link } from 'react-router-dom';
 import { myGarden } from '../../api/garden.js'
+import { Link,useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const Dashboard = () => {
+  const infoUser=useSelector(state=>state.infoUser)
+  const isAuth=useSelector(state=>state.auth)["isLoggedIn"]
+  console.log(isAuth)
   const [tempYArray, setTempYArray] = useState([1, 2, 4, 5, 6, 4, 8, 9, 10, 9, 10, 9, 8, 10, 12, 8, 6, 5, 8, 7, 7, 7, 7, 9, 10, 9, 10, 9, 8, 10, 12]);
   const [humidYArray, setHumidYArray] = useState([2, 3, 5, 6, 7, 5, 9, 10, 11, 10, 11, 10, 9, 11, 13, 9, 7, 6, 9, 8, 8, 8, 8, 10, 11, 10, 11, 10, 9, 11, 13]);
   const [lightYArray, setLightYArray] = useState([2, 3, 5, 6, 7, 5, 9, 10, 11, 10, 11, 10, 9, 11, 13, 9, 7, 6, 9, 8, 8, 8, 8, 10, 11, 10, 11, 10, 9, 11, 13]);
@@ -17,6 +21,7 @@ const Dashboard = () => {
   const [selectedSoilRange, setSelectedSoilRange] = useState('24h');
   const [selectedGarden, setSelectedGarden] = useState('Vườn cà chua');
   const [currentHour, setCurrentHour] = useState('');
+  const navigate=useNavigate()
 
   const gardenOptions = [
     'Vườn xà lách',
@@ -31,10 +36,12 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
+    if (!isAuth) return navigate('/')
     const tempXData = generateXData(selectedTempRange);
     const humidXData = generateXData(selectedHumidRange);
     const lightXData = generateXData(selectedLightRange);
     const soilXData = generateXData(selectedSoilRange);
+   
 
     const tempData = [{
       x: tempXData,
