@@ -3,9 +3,30 @@ import * as styles from './styleAllGarden.js';
 import { fonts } from '../../global.js';
 import { Link,useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { myGarden, getDetailGardens } from '../../api/garden.js'
 
 const AllGarden = () => {
   const infoUser=useSelector(state=>state.infoUser);
+  const isAuth=useSelector(state=>state.auth)["isLoggedIn"]
+  const token=useSelector(state=>state.auth)["token"]["payload"]
+  const [gardensData, setgardensData] = useState([]);
+
+  useEffect(() => {  
+    savedGarden();
+   }, []);
+ 
+
+  const savedGarden = async () => {
+    try {
+      const gardenDetails = await getDetailGardens(token);
+      setgardensData(gardenDetails);
+      const action=updateMyGarden(gardenDetails)
+      dispatch(action)
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
 // Thêm vườn
 const [modalVisible, setModalVisible] = useState(false);
 const [tenVuon, setTenVuon] = useState('');
@@ -23,9 +44,22 @@ const hideModal = () => {
   setModalVisible(false);
 };
 
-const saveData = () => {
-  console.log(`Tên vườn: ${tenVuon}, Vị trí: ${viTri}, Cây trồng: ${cayTrong}`);
-  hideModal();
+const saveData = async () => {
+  try {
+    const gardenName = tenVuon; 
+    const location = viTri; 
+    const cropType = cayTrong;
+    //const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDI1MzAxOTksInVzZXJuYW1lIjoiTiJ9.-UCJafhaOKKMlE4BbP9Ntq3NIgwRmCByFnmtkjRCxYk'; 
+
+    // Gọi hàm myGarden
+    const response = await myGarden(gardenName, location, cropType, token);
+
+    console.log('Result:', response);
+    hideModal(); 
+  } catch(error) {
+    console.error('Error:', error);
+    hideModal(); 
+  };
 };
 
 // Chỉnh sửa vườn
@@ -102,20 +136,19 @@ const [showEditModal, setShowEditModal] = useState(false);
          
      {/* Tất cả khu vườn */}
       <styles.AllGardenContainer>
-                  
-        {/* Vườn 1 */}
-        <styles.GardenContainer>
-          <styles.GardenName>Vườn 1</styles.GardenName>
-          <styles.GardenImageContainer alt="" src="/tomato.png"/>
-          <styles.ButtonOptionContainer>
-            <styles.ButtonOptionDelete  alt="" src="/bin.png"/>
-            <styles.ButtonOptionEdit  alt="" src="/editing.png"/>
-          </styles.ButtonOptionContainer>
-        </styles.GardenContainer>
-
+        {gardensData.map((garden, index) => (
+          <styles.GardenContainer key={index}>
+            <styles.GardenName>Vườn {garden.gardenname}</styles.GardenName>
+            <styles.GardenImageContainer alt="" src="/tomato.png" />
+            <styles.ButtonOptionContainer>
+              <styles.ButtonOptionDelete alt="Delete" src="/bin.png" />
+              <styles.ButtonOptionEdit alt="Edit" src="/editing.png" />
+            </styles.ButtonOptionContainer>
+          </styles.GardenContainer>
+        ))}
       </styles.AllGardenContainer>
-      
-   
+
+
     {/* Taskbar */}
       <styles.Taskbarcontainer>
         <styles.Taskbar />
