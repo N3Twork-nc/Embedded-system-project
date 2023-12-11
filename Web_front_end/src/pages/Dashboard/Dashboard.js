@@ -3,9 +3,34 @@ import * as styles from './styleDashboard';
 import Plotly from 'plotly.js-dist';
 import { fonts } from '../../global.js'
 import { format } from 'date-fns';
-import { Link } from 'react-router-dom';
+import { myGarden, getDetailGardens } from '../../api/garden.js'
+import { Link,useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const Dashboard = () => {
+  const infoUser=useSelector(state=>state.infoUser)
+  const isAuth=useSelector(state=>state.auth)["isLoggedIn"]
+  const token=useSelector(state=>state.auth)["token"]["payload"]
+  const [gardensData, setgardensData] = useState([]);
+  const [gardenOptions, setGardenOptions] = useState([]);
+
+  useEffect(() => {  
+    savedGarden();
+   }, []);
+ 
+
+  const savedGarden = async () => {
+    try {
+      const gardenDetails = await getDetailGardens(token);
+      setgardensData(gardenDetails);
+      const action=updateMyGarden(gardenDetails)
+      dispatch(action)
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  
+  console.log(isAuth)
   const [tempYArray, setTempYArray] = useState([1, 2, 4, 5, 6, 4, 8, 9, 10, 9, 10, 9, 8, 10, 12, 8, 6, 5, 8, 7, 7, 7, 7, 9, 10, 9, 10, 9, 8, 10, 12]);
   const [humidYArray, setHumidYArray] = useState([2, 3, 5, 6, 7, 5, 9, 10, 11, 10, 11, 10, 9, 11, 13, 9, 7, 6, 9, 8, 8, 8, 8, 10, 11, 10, 11, 10, 9, 11, 13]);
   const [lightYArray, setLightYArray] = useState([2, 3, 5, 6, 7, 5, 9, 10, 11, 10, 11, 10, 9, 11, 13, 9, 7, 6, 9, 8, 8, 8, 8, 10, 11, 10, 11, 10, 9, 11, 13]);
@@ -16,13 +41,15 @@ const Dashboard = () => {
   const [selectedSoilRange, setSelectedSoilRange] = useState('24h');
   const [selectedGarden, setSelectedGarden] = useState('Vườn cà chua');
   const [currentHour, setCurrentHour] = useState('');
-
-  const gardenOptions = [
-    'Vườn xà lách',
-    'Vườn cà chua',
-    'Vườn rau mầm',
-    // Thêm các tên vườn khác vào đây
-  ];
+  const navigate=useNavigate()
+  
+  useEffect(() => {
+    // Tạo một mảng mới chứa tên các khu vườn từ gardenDetails và cập nhật gardenOptions
+    if (gardensData && gardensData.length > 0) {
+      const gardenNames = gardensData.map((garden) => `Vườn ${garden.gardenname}`);
+      setGardenOptions([...gardenOptions, ...gardenNames]);
+    }
+  }, [gardensData]);
 
   const handleGardenChange = (event) => {
     setSelectedGarden(event.target.value);
@@ -30,32 +57,16 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
+    if (!isAuth) return navigate('/')
     const tempXData = generateXData(selectedTempRange);
     const humidXData = generateXData(selectedHumidRange);
     const lightXData = generateXData(selectedLightRange);
     const soilXData = generateXData(selectedSoilRange);
-
-    const tempData = [{
-      x: tempXData,
-      y: tempYArray,
-      mode: "lines"
-    }];
-
-    const humidData = [{
-      x: humidXData,
-      y: humidYArray,
-      mode: "lines"
-    }];
-    const lightData = [{
-      x: lightXData,
-      y: lightYArray,
-      mode: "lines"
-    }];
-    const soilData = [{
-      x: soilXData,
-      y: soilYArray,
-      mode: "lines"
-    }];
+   
+    const tempData = [{x: tempXData, y: tempYArray, mode: "lines"}];
+    const humidData = [{x: humidXData, y: humidYArray, mode: "lines"}];
+    const lightData = [{x: lightXData, y: lightYArray, mode: "lines"}];
+    const soilData = [{x: soilXData, y: soilYArray, mode: "lines"}];
 
     const tempLayout = {
       xaxis: {
@@ -162,11 +173,23 @@ const hideModal = () => {
   setModalVisible(false);
 };
 
-const saveData = () => {
-  console.log(`Tên vườn: ${tenVuon}, Vị trí: ${viTri}, Cây trồng: ${cayTrong}`);
-  hideModal();
-};
+const saveData = async () => {
+  try {
+    const gardenName = tenVuon; 
+    const location = viTri; 
+    const cropType = cayTrong;
+    //const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDI1MzAxOTksInVzZXJuYW1lIjoiTiJ9.-UCJafhaOKKMlE4BbP9Ntq3NIgwRmCByFnmtkjRCxYk'; 
 
+    // Gọi hàm myGarden
+    const response = await myGarden(gardenName, location, cropType, token);
+
+    console.log('Result:', response);
+    hideModal(); 
+  } catch(error) {
+    console.error('Error:', error);
+    hideModal(); 
+  };
+};
 
   // nhấn nút bật tắt thiết bị
   const [shiftedLight, setShiftedLight] = useState(false);
@@ -271,11 +294,11 @@ const saveData = () => {
 
           <styles.ContainerInfoUser>          
             <styles.Nametext>
-              <styles.Hello style={{cursor: 'default'}}>Hello,</styles.Hello>
-              <styles.NguynTrBo style={{cursor: 'default'}}> Nguyễn Trà Bảo Ngân</styles.NguynTrBo>
+              <styles.Hello style={{cursor: 'default'}}>Hello, </styles.Hello>
+              <styles.NguynTrBo style={{cursor: 'default'}}>{infoUser.fullname}</styles.NguynTrBo>
             </styles.Nametext>
 
-            <styles.Locatetext style={{cursor: 'default'}}>Dĩ An, Bình Dương</styles.Locatetext>
+            <styles.Locatetext style={{cursor: 'default'}}>{infoUser.address}</styles.Locatetext>
           </styles.ContainerInfoUser>
         </styles.Userinfocontainer>
 
