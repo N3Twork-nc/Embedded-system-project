@@ -100,7 +100,18 @@ position: absolute;
   color: var(--color-darkgreen-100);
 `;
 
+export const ModalContainer = styled.div`
 
+    height: 200px;
+    width: 200px;
+    border-radius: 15px;
+    border: 1px solid #B4E0A0;
+    background-color: var(--white);
+    font-size: 16px;
+    align-items: center;
+    justify-content: center;
+    
+`
 export const GardenName = styled.div`
   font-size: 25px;
   font-weight: 1000;
@@ -109,6 +120,7 @@ export const GardenName = styled.div`
   display: inline-block;
   align-self: center;
   margin-bottom: 20px;
+  margin-top: 20px;
 `;
 export const GardenImageContainer = styled.img`
    height: 200px;
@@ -116,7 +128,7 @@ export const GardenImageContainer = styled.img`
   border-radius: 15px;
 `;
 export const GardenContainer = styled.div`
-  height: 370px;
+
   width: 300px;
   box-shadow: var(--shadow);
   background-color: var(--white);
@@ -125,13 +137,15 @@ export const GardenContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  z-index: 0;
 `;
 
 export const ButtonOptionContainer = styled.div`
    flex-direction: row;
   align-items: center;
   justify-content: center;
-  margin-top: 30px;
+  margin-top: 20px;
+  margin-bottom: 10px;
 `
 export const ButtonOptionDelete = styled.img`
   width: 35px;
@@ -148,6 +162,13 @@ export const ButtonOptionEdit = styled.img`
   box-shadow: 0 0 5px 1px var(--main);
 }
 `
+export const ButtonOptionInfo = styled.img`
+  width: 36px;
+  height: 36px;
+  &:hover {
+  box-shadow: 0 0 5px 1px var(--main);
+}
+`
 export const MoreIcon = styled.img`
   position: relative;
   width: 24px;
@@ -155,6 +176,7 @@ export const MoreIcon = styled.img`
   overflow: hidden;
   flex-shrink: 0;
 `;
+
 export const AllGardenContainer = styled.div`
   position: absolute;
   width: calc(100% - 250px);
