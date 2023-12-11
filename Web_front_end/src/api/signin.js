@@ -10,7 +10,6 @@ export const signin = async (username, password) => {
     const info=response.data['info'];
     const token = response.data['token'];
     const status = response.status;
-    console.log(status)
     return {status,token,info};
   } catch (error) {
     const status=error.response.status

@@ -2,19 +2,15 @@ import {createSlice} from "@reduxjs/toolkit"
 
 const authReducer=createSlice({
     name:"Auth",
-    initialState:{
-        "isLoggedIn":localStorage.getItem('isLoggedIn'),
-        "token":"",
-    },
+    initialState:localStorage.getItem('Authentication'),
     reducers: {
-        loginSuccess: (state,data) => {
-            state.isLoggedIn = true;
-            localStorage.setItem('isLoggedIn',true)
-            state.token=data;
+        loginSuccess: (state,action) => {
+            localStorage.setItem('Authentication',JSON.stringify({"token":action.payload,"isLoggedIn":true}));
+            return localStorage.getItem('Authentication')
         },
         loginFailure: (state) => {
-            state.isLoggedIn=false
-            state.token=null
+            localStorage.setItem('Authentication',null);
+            return localStorage.getItem('Authentication')
         }
     }
 })

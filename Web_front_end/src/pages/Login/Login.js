@@ -3,17 +3,16 @@ import * as styles from './styleLogin.js';
 import { Link } from 'react-router-dom';
 import { signin } from '../../api/signin.js';
 import { useDispatch } from "react-redux"
-import {updateToken} from "../../reducers/token"
 import {updateInfoUser} from "../../reducers/infoUser"
+import { loginSuccess} from "../../reducers/auth.js"
+import { useNavigate } from 'react-router-dom';
 
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const dispatch = useDispatch();
-  const info = useSelector(state=>state.infoUser);  
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
+  const dispatch=useDispatch()
   const [showPassword, setShowPassword] = useState(false);
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
@@ -31,20 +30,18 @@ const Login = () => {
     try {
       const response = await signin(username, password);
       if (response['status']=="200"){
-        setIsLoading(false);
-        const acUpdateToken=updateToken(response['token'])
         const acUpdateInfo=updateInfoUser(response['info'])
-        dispatch(acUpdateToken)
+        const login=loginSuccess(response['token'])
+        dispatch(login)
         dispatch(acUpdateInfo)
-        // return navigation.navigate('Home')
+        navigate('/dashboard')
       }
       else 
       {
-        // Alert.alert('Tài khoản hoặc mật khẩu không chính xác');
-        // setIsLoading(false);
-        // return navigation.navigate('SignIn')
+        alert('Tài khoản hoặc mật khẩu không chính xác');
       }
     } catch (error) {
+      alert('Quá tinh đăng nhập đã xảy ra lỗi');
       console.error('Error while signing in:', error);
     }
   };
@@ -86,7 +83,7 @@ const Login = () => {
           <styles.Remember> Remember me</styles.Remember>
           <styles.Forgot>Forgot password?</styles.Forgot>
         </styles.ForgotCon>
-        <Link to='/dashboard'>
+        <Link>
           <styles.LoginButton onClick={handleSignIn}>Login</styles.LoginButton>
         </Link>
         

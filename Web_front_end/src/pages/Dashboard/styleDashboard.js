@@ -1208,7 +1208,7 @@ export const ID = styled.div`
 export const IDcontainer = styled.div`
   position: absolute;
   height: 71.62%;
-  width: 29%;
+  width: 30%;
   top: 13.51%;
   bottom: 14.86%;
   left: 43%;
