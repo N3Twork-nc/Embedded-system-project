@@ -45,7 +45,6 @@ export const myGarden = async (gardenName, location, cropType, token) => {
     return error;
   }
 };
-
 export const getDetailGardens = async (token) => {
   try {
     const response = await axios.get(IPSERVER + "APIGetDetailGarden",

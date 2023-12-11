@@ -6,6 +6,7 @@ const infoUser=createSlice({
     reducers:{
         updateInfoUser(state,data){
             state=data.payload
+            localStorage.setItem("infoUser",data.payload)
             return state
         },
 
@@ -17,7 +18,7 @@ const infoUser=createSlice({
             state.gender = "";
             state.phoneNumber = "";
             state.address = "";
-            localStorage.setItem("infoUser",state)
+            
         },
     }
 })
