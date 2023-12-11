@@ -7,8 +7,9 @@ import { myGarden, getDetailGardens } from '../../api/garden.js'
 
 const AllGarden = () => {
   const infoUser=useSelector(state=>state.infoUser);
-  const isAuth=useSelector(state=>state.auth)["isLoggedIn"]
-  const token=useSelector(state=>state.auth)["token"]["payload"]
+  const Authentication=JSON.parse(useSelector(state=>state.auth))
+  const isLoggedIn=Authentication.isLoggedIn
+  const token=Authentication.token
   const [gardensData, setgardensData] = useState([]);
 
   useEffect(() => {  
@@ -49,7 +50,6 @@ const saveData = async () => {
     const gardenName = tenVuon; 
     const location = viTri; 
     const cropType = cayTrong;
-    //const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDI1MzAxOTksInVzZXJuYW1lIjoiTiJ9.-UCJafhaOKKMlE4BbP9Ntq3NIgwRmCByFnmtkjRCxYk'; 
 
     // Gọi hàm myGarden
     const response = await myGarden(gardenName, location, cropType, token);

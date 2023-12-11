@@ -9,9 +9,10 @@ import { useSelector } from 'react-redux';
 import { getDataGarden } from '../../api/garden.js';
 
 const Dashboard = () => {
-  const infoUser=useSelector(state=>state.infoUser)
-  const isAuth=useSelector(state=>state.auth)["isLoggedIn"]
-  const token=useSelector(state=>state.auth)["token"]["payload"]
+  const infoUser=JSON.parse(useSelector(state=>state.infoUser))
+  const Authentication=JSON.parse(useSelector(state=>state.auth))
+  const isLoggedIn=Authentication.isLoggedIn
+  const token=Authentication.token
   const [gardensData, setgardensData] = useState([]);
   const [gardenOptions, setGardenOptions] = useState([]);
 
@@ -24,8 +25,8 @@ const Dashboard = () => {
     try {
       const gardenDetails = await getDetailGardens(token);
       setgardensData(gardenDetails);
-      const action=updateMyGarden(gardenDetails)
-      dispatch(action)
+      // const action=updateMyGarden(gardenDetails)
+      // dispatch(action)
     } catch (error) {
       console.log(error);
     }
@@ -40,6 +41,10 @@ const Dashboard = () => {
   const [selectedSoilRange, setSelectedSoilRange] = useState('24h');
   const [selectedGarden, setSelectedGarden] = useState('Vườn cà chua');
   const [currentHour, setCurrentHour] = useState('');
+  const [tempXData,setTempXData]=useState([])
+  const [humidXData,setHumidXData]=useState([])
+  const [lightXData,setLightXData]=useState([])
+  const [soilXData,setSoilXData]=useState([])
   const navigate=useNavigate()
   
   useEffect(() => {
@@ -56,12 +61,7 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
-    if (!isAuth) return navigate('/')
-    const tempXData = generateXData(selectedTempRange);
-    const humidXData = generateXData(selectedHumidRange);
-    const lightXData = generateXData(selectedLightRange);
-    const soilXData = generateXData(selectedSoilRange);
-   
+    if (!isLoggedIn) return navigate('/')
     const tempData = [{x: tempXData, y: tempYArray, mode: "lines"}];
     const humidData = [{x: humidXData, y: humidYArray, mode: "lines"}];
     const lightData = [{x: lightXData, y: lightYArray, mode: "lines"}];
@@ -116,9 +116,13 @@ const Dashboard = () => {
 
   
   const  handleTempDropdownChange = async (event) => {
+    const idGarden="20231211165037135375"
+    const interval=1
     setSelectedTempRange(event.target.value);
-    const data=getDataGarden(idGarden,token);
+    const data=await getDataGarden(idGarden,"Temperature",event.target.value,token);
     console.log(data)
+    setTempXData(data.keys)
+    setTempYArray(data.values)
   };
 
   const handleHumidDropdownChange = (event) => {
@@ -133,11 +137,11 @@ const Dashboard = () => {
 
   const generateXData = (selected) => {
     switch (selected) {
-      case '24h':
+      case '1':
         return Array.from({ length: 24 }, (_, i) => i + 1);
-      case '7d':
+      case '7':
         return generateDateRange(7);
-      case '30d':
+      case '30':
         return generateDateRange(30);
       default:
         return Array.from({ length: 24 }, (_, i) => i + 1);
@@ -297,7 +301,7 @@ const saveData = async () => {
           <styles.ContainerInfoUser>          
             <styles.Nametext>
               <styles.Hello style={{cursor: 'default'}}>Hello, </styles.Hello>
-              <styles.NguynTrBo style={{cursor: 'default'}}>{infoUser.fullname}</styles.NguynTrBo>
+              <styles.NguynTrBo style={{cursor: 'default'}}>{infoUser["fullname"]}</styles.NguynTrBo>
             </styles.Nametext>
 
             <styles.Locatetext style={{cursor: 'default'}}>{infoUser.address}</styles.Locatetext>
@@ -441,9 +445,9 @@ const saveData = async () => {
               backgroundColor: '#EBFFE2'
             }}
           >
-            <option value="24h">24 giờ qua</option>
-            <option value="7d">7 ngày qua</option>
-            <option value="30d">30 ngày qua</option>
+            <option value="1">24 giờ qua</option>
+            <option value="7">7 ngày qua</option>
+            <option value="30">30 ngày qua</option>
           </select>
         </styles.Dropdown1Container>
         <div id="tempChart" style={{ height: '450px', width: '100%' }}></div>
@@ -464,9 +468,9 @@ const saveData = async () => {
               backgroundColor: '#EBFFE2'
             }}
           >
-            <option value="24h">24h qua</option>
-            <option value="7d">7 ngày qua</option>
-            <option value="30d">30 ngày qua</option>
+            <option value="1">24h qua</option>
+            <option value="7">7 ngày qua</option>
+            <option value="30">30 ngày qua</option>
           </select>
         </styles.Dropdown2Container>
         <div id="humidChart" style={{ height: '450px', width: '100%' }}></div>
@@ -487,9 +491,9 @@ const saveData = async () => {
               backgroundColor: '#EBFFE2'
             }}
           >
-            <option value="24h">24 giờ qua</option>
-            <option value="7d">7 ngày qua</option>
-            <option value="30d">30 ngày qua</option>
+            <option value="1">24 giờ qua</option>
+            <option value="7">7 ngày qua</option>
+            <option value="30">30 ngày qua</option>
           </select>
         </styles.Dropdown3Container>
         <div id="lightChart" style={{ height: '450px', width: '100%' }}></div>
@@ -510,9 +514,9 @@ const saveData = async () => {
                 backgroundColor: '#EBFFE2'
               }}
             >
-              <option value="24h">24 giờ qua</option>
-              <option value="7d">7 ngày qua</option>
-              <option value="30d">30 ngày qua</option>
+              <option value="1">24 giờ qua</option>
+              <option value="7">7 ngày qua</option>
+              <option value="30">30 ngày qua</option>
             </select>
           </styles.Dropdown4Container>
           <div id="soilChart" style={{ height: '450px', width: '100%' }}></div>

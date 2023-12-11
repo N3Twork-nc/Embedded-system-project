@@ -4,21 +4,14 @@ const infoUser=createSlice({
     name:"infoUser",
     initialState:localStorage.getItem("infoUser"),
     reducers:{
-        updateInfoUser(state,data){
-            state=data.payload
-            localStorage.setItem("infoUser",data.payload)
-            return state
+        updateInfoUser(state,action){
+            localStorage.setItem("infoUser",JSON.stringify(action.payload))
+            return localStorage.getItem("infoUser")
         },
 
-        deleteInfoUser(state, action) {
-            state.username = "";
-            state.password = "";
-            state.email = "";
-            state.fullname = "";
-            state.gender = "";
-            state.phoneNumber = "";
-            state.address = "";
-            
+        deleteInfoUser(state) {
+            localStorage.setItem("infoUser",null)
+            return localStorage.getItem("infoUser")
         },
     }
 })
