@@ -60,10 +60,17 @@ const Dashboard = () => {
     }
   }, [gardensData]);
 
+  const [selectedGardenId, setSelectedGardenId] = useState('');
+
   const handleGardenChange = (event) => {
-    setSelectedGarden(event.target.value);
-    // Thực hiện các thay đổi khi vườn được chọn
+    setSelectedGarden(event.target.value); 
+    const selectedGarden = event.target.value;
+    const garden = gardensData.find((garden) => `Vườn ${garden.gardenname}` == selectedGarden); 
+    if (garden) {
+      setSelectedGardenId(garden.gardenId); 
+    }
   };
+
 
   useEffect(() => {
     if (!isLoggedIn) return navigate('/')
@@ -169,7 +176,6 @@ const saveData = async () => {
     const gardenName = tenVuon; 
     const location = viTri; 
     const cropType = cayTrong;
-    //const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDI1MzAxOTksInVzZXJuYW1lIjoiTiJ9.-UCJafhaOKKMlE4BbP9Ntq3NIgwRmCByFnmtkjRCxYk'; 
 
     // Gọi hàm myGarden
     const response = await myGarden(gardenName, location, cropType, token);
@@ -210,7 +216,7 @@ const saveData = async () => {
     {/* Header */}
       <styles.Webheadercontainer>
       <styles.IDcontainer>
-           <styles.ID>ID vườn: 12345678910201023231</styles.ID>
+           <styles.ID>ID vườn: {selectedGardenId}</styles.ID>
         </styles.IDcontainer>
           <styles.Dashboard2 style={{cursor: 'default'}}>Dashboard</styles.Dashboard2>
           <styles.AddgardenContainer>
