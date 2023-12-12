@@ -395,11 +395,12 @@ export const Taskbarcontainer = styled.div`
 `;
 export const Dashboard2 = styled.div`
   position: absolute;
-  width: 15.63%;
+  width: 28%;
   top: 10.53%;
   left: 0%;
   font-weight: 600;
-  display: inline-block;z
+  display: inline-block;
+  font-family: roboto;
 `;
 
 export const Icongarden = styled.img`
@@ -489,4 +490,28 @@ export const DashboardRoot = styled.div`
   font-size: var(--font-size-4xl);
   color: var(--primary);
   font-family: var(--font-roboto);
+`;
+
+export const CountGarden = styled.div`
+  position: absolute;
+  width: 15%;
+  top: 0px;
+  right: 0px;
+  left: 850px;
+  height: 76px;
+  font-size: 18px;
+  color: #2c3e50;
+  font-family: var(--font-roboto);
+  background-color: var(--white);
+  border-radius: 15px;
+`;
+export const CountText = styled.div`
+  position: absolute;
+  top: 30%;
+  left: 5%;
+  font-size: 23px;
+  width: 80%;
+  font-weight: 600;
+  display: inline-block;
+  color: var(--primary);
 `;
