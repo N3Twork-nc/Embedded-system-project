@@ -8,7 +8,7 @@ import { updateMyGarden } from '../../reducers/mygarden.js'
 
 
 const AllGarden = () => {
-  const infoUser=useSelector(state=>state.infoUser);
+  const infoUser=JSON.parse(useSelector(state=>state.infoUser))
   const Authentication=JSON.parse(useSelector(state=>state.auth))
   const isLoggedIn=Authentication.isLoggedIn
   const token=Authentication.token
@@ -74,10 +74,13 @@ const saveData = async () => {
   };
 };
 // Chi tiết vươnf
+const [selectedGardenId, setSelectedGardenId] = useState(null);
 const [modalInfoVisible, setModalInfoVisible] = useState(false);
 const showModalInfoGarden = () => {
   setModalInfoVisible(true);
 };
+
+
 const hideInfo = () =>
 {
   setModalInfoVisible(false);
@@ -111,8 +114,6 @@ const [modalEditVisible, setModalEditVisible] = useState(false);
       hideEdit(); 
     };
   };
-
-  const [deleteGardenId,setDeleteGardenId]=useState(null)
 
   // Hàm xác nhận xóa vườn
   const handleConfirmDelete = async (gardenId) => {
@@ -195,7 +196,7 @@ const [modalEditVisible, setModalEditVisible] = useState(false);
           <styles.ContainerInfoUser>          
             <styles.Nametext>
               <styles.Hello style={{cursor: 'default'}}>Hello,</styles.Hello>
-              <styles.NguynTrBo style={{cursor: 'default'}}> {infoUser.fullname}</styles.NguynTrBo>
+              <styles.NguynTrBo style={{cursor: 'default'}}>{infoUser["fullname"]}</styles.NguynTrBo>
             </styles.Nametext>
 
             <styles.Locatetext style={{cursor: 'default'}}>{infoUser.address}</styles.Locatetext>
@@ -243,7 +244,7 @@ const [modalEditVisible, setModalEditVisible] = useState(false);
                       style={{ position: 'relative',  zIndex: 1, 
                              width: '283px',fontFamily: 'roboto',  marginBottom: 10,fontSize: '16px', border: '1px solid #B4E0A0',fontWeight: 'bold', backgroundColor: '#fff'}}>
                     {/* Nội dung của modal */}
-                    <div className="modal-info-content">
+                    <div className="modal-edit-content">
                     <input
                         type="text"
                         placeholder="Tên vườn"
