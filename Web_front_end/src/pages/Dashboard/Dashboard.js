@@ -122,53 +122,33 @@ const Dashboard = () => {
     Plotly.newPlot("soilChart", soilData, soilLayout);
   }, [tempYArray, humidYArray, lightYArray, soilYArray, selectedTempRange, selectedHumidRange, selectedLightRange, selectedSoilRange]);
 
-  
+  const idGarden="20231211165037135375"
   const  handleTempDropdownChange = async (event) => {
-    const idGarden="20231211165037135375"
-    const interval=1
     setSelectedTempRange(event.target.value);
     const data=await getDataGarden(idGarden,"Temperature",event.target.value,token);
-    console.log(data)
     setTempXData(data.keys)
     setTempYArray(data.values)
   };
 
-  const handleHumidDropdownChange = (event) => {
+  const handleHumidDropdownChange = async (event) => {
     setSelectedHumidRange(event.target.value);
+    console.log(event)
+    const data=await getDataGarden(idGarden,"Humidity",event.target.value,token);
+    setHumidXData(data.keys)
+    setHumidYArray(data.values)
   };
-  const handleLightDropdownChange = (event) => {
+  const handleLightDropdownChange = async (event) => {
     setSelectedLightRange(event.target.value);
+    const data=await getDataGarden(idGarden,"Light",event.target.value,token);
+    setLightXData(data.keys)
+    setLightYArray(data.values)
   };
-  const handleSoilDropdownChange = (event) => {
+  const handleSoilDropdownChange = async (event) => {
     setSelectedSoilRange(event.target.value);
-  };
-
-  const generateXData = (selected) => {
-    switch (selected) {
-      case '1':
-        return Array.from({ length: 24 }, (_, i) => i + 1);
-      case '7':
-        return generateDateRange(7);
-      case '30':
-        return generateDateRange(30);
-      default:
-        return Array.from({ length: 24 }, (_, i) => i + 1);
-    }
-  };
-
-  const generateDateRange = (daysAgo) => {
-    const dates = [];
-    const currentDate = new Date();
-
-    for (let i = daysAgo - 1; i >= 0; i--) {
-      const date = new Date(currentDate);
-      date.setDate(currentDate.getDate() - i);
-      const formattedDate = `${date.getDate()}/${date.getMonth() + 1}`; // Format: dd/mm
-      dates.push(formattedDate);
-    }
-
-    return dates;
-  };
+    const data=await getDataGarden(idGarden,"Moisture",event.target.value,token);
+    setSoilXData(data.keys)
+    setSoilYArray(data.values)
+  }
 
 // Thêm vườn
 const [modalVisible, setModalVisible] = useState(false);
@@ -308,7 +288,7 @@ const saveData = async () => {
       {/* Info người dùng */}
         <styles.Userinfocontainer>
 
-          <styles.AvatarimageIcon alt="" src="/avatarimage@2x.png" />
+          <styles.AvatarimageIcon alt="" src="/ntbn.jpg" />
 
           <styles.ContainerInfoUser>          
             <styles.Nametext>
@@ -406,7 +386,7 @@ const saveData = async () => {
 
       {/* Hình ảnh */}
       <styles.Imagecontainer>
-        <styles.ImageGardenIcon alt="" src="/tomato.png" />
+        <styles.ImageGardenIcon alt="" src="/placeholder.jpg" />
         <styles.Headerimagecontainer>
           <styles.ButtoneditIcon alt="" src="/edit.png" />
           <styles.Imagetitle>Hình ảnh</styles.Imagetitle>
