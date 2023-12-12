@@ -36,6 +36,7 @@ const Dashboard = () => {
   const navigate=useNavigate()
 
   useEffect(() => {  
+    
     savedGarden();
    }, []);
  
@@ -44,28 +45,30 @@ const Dashboard = () => {
     try {
       const gardenDetails = await getDetailGardens(token);
       setgardensData(gardenDetails);
+      setSelectedGardenId(gardenDetails[0].gardenId)
       // const action=updateMyGarden(gardenDetails)
       // dispatch(action)
       setup(gardenDetails[0].gardenId);
+      
     } catch (error) {
       console.log(error);
     }
   };
   const setup=(idGreden)=>{
     setSelectedGardenId(idGreden)
+    setGraph(idGreden,"Temperature",1);
+    setGraph(idGreden,"Humidity",1);
+    setGraph(idGreden,"Light",1);
+    setGraph(idGreden,"Moisture",1)
     const action=resetDataMQTT()
     dispatch(action)
     const mqttClient=new MQTT(infoUser.username,idGreden)
-    setGraph("Temperature",1);
-    setGraph("Humidity",1);
-    setGraph("Light",1);
-    setGraph("Moisture",1)
   }
 
   
 
-  const setGraph=  async (type,interval)=>{
-    const data=await getDataGarden(selectedGardenId,type,interval,token);
+  const setGraph=  async (idGreden,type,interval)=>{
+    const data=await getDataGarden(idGreden,type,interval,token);
     switch (type){
       case "Temperature":
         setSelectedTempRange(interval);
@@ -86,7 +89,6 @@ const Dashboard = () => {
         setSelectedSoilRange(interval);
         setSoilXData(data.keys)
         setSoilYArray(data.values)
-        console.log(data)
         break;
     }
   }
@@ -110,7 +112,7 @@ const Dashboard = () => {
         tickvals: tempXData,
         ticktext: tempXData.map(value => value.toString())
       },
-      yaxis: { range: [5, 16], title: "Giá trị nhiệt độ °C" },
+      yaxis: { range: [20, 30], title: "Giá trị nhiệt độ °C" },
       title: "Biểu đồ nhiệt độ"
     };
 
@@ -121,7 +123,7 @@ const Dashboard = () => {
         tickvals: humidXData,
         ticktext: humidXData.map(value => value.toString())
       },
-      yaxis: { range: [0, 15], title: "Độ ẩm không khí (%)" },
+      yaxis: { range: [50, 90], title: "Độ ẩm không khí (%)" },
       title: "Biểu đồ độ ẩm không khí"
     };
     const lightLayout = {
@@ -131,7 +133,7 @@ const Dashboard = () => {
         tickvals: lightXData,
         ticktext: lightXData.map(value => value.toString())
       },
-      yaxis: { range: [0, 15], title: "Ánh sáng (%)" },
+      yaxis: { range: [5, 50], title: "Ánh sáng (%)" },
       title: "Biểu đồ cường độ ánh sáng"
     };
     const soilLayout = {
@@ -141,7 +143,7 @@ const Dashboard = () => {
         tickvals: soilXData,
         ticktext: soilXData.map(value => value.toString())
       },
-      yaxis: { range: [0, 15], title: "Độ ẩm đất (%)" },
+      yaxis: { range: [20, 80], title: "Độ ẩm đất (%)" },
       title: "Biểu đồ độ ẩm đất"
     };
     Plotly.newPlot("tempChart", tempData, tempLayout);
@@ -151,18 +153,17 @@ const Dashboard = () => {
   }, [tempYArray, humidYArray, lightYArray, soilYArray, selectedTempRange, selectedHumidRange, selectedLightRange, selectedSoilRange]);
 
   const  handleTempDropdownChange = async (event) => {
-    setGraph("Temperature",event.target.value)
+    setGraph(selectedGardenId,"Temperature",event.target.value)
   };
 
   const handleHumidDropdownChange = async (event) => {
-    setGraph("Humidity",event.target.value)
+    setGraph(selectedGardenId,"Humidity",event.target.value)
   };
   const handleLightDropdownChange = async (event) => {
-    setGraph("Light",event.target.value)
+    setGraph(selectedGardenId,"Light",event.target.value)
   };
   const handleSoilDropdownChange = async (event) => {
-    setGraph("Moisture",event.target.value)
-
+    setGraph(selectedGardenId,"Moisture",event.target.value)
   }
 
 // Thêm vườn
@@ -475,7 +476,7 @@ const saveData = async () => {
               backgroundColor: '#EBFFE2'
             }}
           >
-            <option value="1">24h qua</option>
+            <option value="1">24 giờ qua</option>
             <option value="7">7 ngày qua</option>
             <option value="30">30 ngày qua</option>
           </select>

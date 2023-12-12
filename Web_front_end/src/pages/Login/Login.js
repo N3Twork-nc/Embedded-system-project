@@ -41,7 +41,7 @@ const Login = () => {
         alert('Tài khoản hoặc mật khẩu không chính xác');
       }
     } catch (error) {
-      alert('Quá tinh đăng nhập đã xảy ra lỗi');
+      alert('Quá trình đăng nhập đã xảy ra lỗi');
       console.error('Error while signing in:', error);
     }
   };
