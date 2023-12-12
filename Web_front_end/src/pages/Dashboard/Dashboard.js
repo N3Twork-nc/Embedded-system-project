@@ -162,6 +162,7 @@ const Dashboard = () => {
   };
   const handleSoilDropdownChange = async (event) => {
     setGraph("Moisture",event.target.value)
+
   }
 
 // Thêm vườn
@@ -302,7 +303,7 @@ const saveData = async () => {
       {/* Info người dùng */}
         <styles.Userinfocontainer>
 
-          <styles.AvatarimageIcon alt="" src="/avatarimage@2x.png" />
+          <styles.AvatarimageIcon alt="" src="/ntbn.jpg" />
 
           <styles.ContainerInfoUser>          
             <styles.Nametext>
@@ -400,7 +401,7 @@ const saveData = async () => {
 
       {/* Hình ảnh */}
       <styles.Imagecontainer>
-        <styles.ImageGardenIcon alt="" src="/tomato.png" />
+        <styles.ImageGardenIcon alt="" src="/placeholder.jpg" />
         <styles.Headerimagecontainer>
           <styles.ButtoneditIcon alt="" src="/edit.png" />
           <styles.Imagetitle>Hình ảnh</styles.Imagetitle>
