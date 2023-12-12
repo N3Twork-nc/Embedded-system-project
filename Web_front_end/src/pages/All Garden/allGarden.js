@@ -56,6 +56,15 @@ const saveData = async () => {
 
     // Gọi hàm myGarden
     const response = await myGarden(gardenName, location, cropType, token);
+    if (response) {
+      const gardenDetails = await getDetailGardens(token);
+      setgardensData(gardenDetails);
+      const action = updateMyGarden(gardenDetails);
+      dispatch(action);
+      alert('Thêm vườn thành công');
+    } else {
+      alert('Thêm vườn thất bại');
+    }
 
     console.log('Result:', response);
     hideModal(); 
