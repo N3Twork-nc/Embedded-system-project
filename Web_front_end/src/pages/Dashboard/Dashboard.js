@@ -8,19 +8,34 @@ import { Link,useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { getDataGarden } from '../../api/garden.js';
 import MQTT from "../../mqtt"
+import {resetDataMQTT} from "../../reducers/dataMQTT"
+import { useDispatch } from 'react-redux';
 
 const Dashboard = () => {
+  const dispatch=useDispatch()
   const dataMQTT=useSelector(state=>state.dataMQTT)
-  console.log(dataMQTT)
   const infoUser=JSON.parse(useSelector(state=>state.infoUser))
   const Authentication=JSON.parse(useSelector(state=>state.auth))
   const isLoggedIn=Authentication.isLoggedIn
   const token=Authentication.token
   const [gardensData, setgardensData] = useState([]);
-  const [gardenOptions, setGardenOptions] = useState([]);
+  const [tempYArray, setTempYArray] = useState([1, 2, 4, 5, 6, 4, 8, 9, 10, 9, 10, 9, 8, 10, 12, 8, 6, 5, 8, 7, 7, 7, 7, 9, 10, 9, 10, 9, 8, 10, 12]);
+  const [humidYArray, setHumidYArray] = useState([2, 3, 5, 6, 7, 5, 9, 10, 11, 10, 11, 10, 9, 11, 13, 9, 7, 6, 9, 8, 8, 8, 8, 10, 11, 10, 11, 10, 9, 11, 13]);
+  const [lightYArray, setLightYArray] = useState([2, 3, 5, 6, 7, 5, 9, 10, 11, 10, 11, 10, 9, 11, 13, 9, 7, 6, 9, 8, 8, 8, 8, 10, 11, 10, 11, 10, 9, 11, 13]);
+  const [soilYArray, setSoilYArray] = useState([2, 3, 5, 6, 7, 5, 9, 10, 11, 10, 11, 10, 9, 11, 13, 9, 7, 6, 9, 8, 8, 8, 8, 10, 11, 10, 11, 10, 9, 11, 13]);
+  const [selectedTempRange, setSelectedTempRange] = useState('1');
+  const [selectedHumidRange, setSelectedHumidRange] = useState('1');
+  const [selectedLightRange, setSelectedLightRange] = useState('1');
+  const [selectedSoilRange, setSelectedSoilRange] = useState('1');
+  const [currentHour, setCurrentHour] = useState('');
+  const [tempXData,setTempXData]=useState([])
+  const [humidXData,setHumidXData]=useState([])
+  const [lightXData,setLightXData]=useState([])
+  const [soilXData,setSoilXData]=useState([])
+  const [selectedGardenId, setSelectedGardenId] = useState('');
+  const navigate=useNavigate()
 
   useEffect(() => {  
-    const mqttClient=new MQTT(infoUser.username,"20231211165037135375")
     savedGarden();
    }, []);
  
@@ -31,44 +46,53 @@ const Dashboard = () => {
       setgardensData(gardenDetails);
       // const action=updateMyGarden(gardenDetails)
       // dispatch(action)
+      setup(gardenDetails[0].gardenId);
     } catch (error) {
       console.log(error);
     }
   };
+  const setup=(idGreden)=>{
+    setSelectedGardenId(idGreden)
+    const action=resetDataMQTT()
+    dispatch(action)
+    const mqttClient=new MQTT(infoUser.username,idGreden)
+    setGraph("Temperature",1);
+    setGraph("Humidity",1);
+    setGraph("Light",1);
+    setGraph("Moisture",1)
+  }
 
-  const [tempYArray, setTempYArray] = useState([1, 2, 4, 5, 6, 4, 8, 9, 10, 9, 10, 9, 8, 10, 12, 8, 6, 5, 8, 7, 7, 7, 7, 9, 10, 9, 10, 9, 8, 10, 12]);
-  const [humidYArray, setHumidYArray] = useState([2, 3, 5, 6, 7, 5, 9, 10, 11, 10, 11, 10, 9, 11, 13, 9, 7, 6, 9, 8, 8, 8, 8, 10, 11, 10, 11, 10, 9, 11, 13]);
-  const [lightYArray, setLightYArray] = useState([2, 3, 5, 6, 7, 5, 9, 10, 11, 10, 11, 10, 9, 11, 13, 9, 7, 6, 9, 8, 8, 8, 8, 10, 11, 10, 11, 10, 9, 11, 13]);
-  const [soilYArray, setSoilYArray] = useState([2, 3, 5, 6, 7, 5, 9, 10, 11, 10, 11, 10, 9, 11, 13, 9, 7, 6, 9, 8, 8, 8, 8, 10, 11, 10, 11, 10, 9, 11, 13]);
-  const [selectedTempRange, setSelectedTempRange] = useState('24h');
-  const [selectedHumidRange, setSelectedHumidRange] = useState('24h');
-  const [selectedLightRange, setSelectedLightRange] = useState('24h');
-  const [selectedSoilRange, setSelectedSoilRange] = useState('24h');
-  const [selectedGarden, setSelectedGarden] = useState('Vườn cà chua');
-  const [currentHour, setCurrentHour] = useState('');
-  const [tempXData,setTempXData]=useState([])
-  const [humidXData,setHumidXData]=useState([])
-  const [lightXData,setLightXData]=useState([])
-  const [soilXData,setSoilXData]=useState([])
-  const navigate=useNavigate()
   
-  useEffect(() => {
-    // Tạo một mảng mới chứa tên các khu vườn từ gardenDetails và cập nhật gardenOptions
-    if (gardensData && gardensData.length > 0) {
-      const gardenNames = gardensData.map((garden) => `Vườn ${garden.gardenname}`);
-      setGardenOptions([...gardenOptions, ...gardenNames]);
-    }
-  }, [gardensData]);
 
-  const [selectedGardenId, setSelectedGardenId] = useState('');
+  const setGraph=  async (type,interval)=>{
+    const data=await getDataGarden(selectedGardenId,type,interval,token);
+    switch (type){
+      case "Temperature":
+        setSelectedTempRange(interval);
+        setTempXData(data.keys)
+        setTempYArray(data.values)
+        break;
+      case "Humidity":
+        setSelectedHumidRange(interval);
+        setHumidXData(data.keys)
+        setHumidYArray(data.values)
+        break;
+      case "Light":
+        setSelectedLightRange(interval);
+        setLightXData(data.keys)
+        setLightYArray(data.values)
+        break;
+      case "Moisture":
+        setSelectedSoilRange(interval);
+        setSoilXData(data.keys)
+        setSoilYArray(data.values)
+        console.log(data)
+        break;
+    }
+  }
 
   const handleGardenChange = (event) => {
-    setSelectedGarden(event.target.value); 
-    const selectedGarden = event.target.value;
-    const garden = gardensData.find((garden) => `Vườn ${garden.gardenname}` == selectedGarden); 
-    if (garden) {
-      setSelectedGardenId(garden.gardenId); 
-    }
+    setup(event.target.value);
   };
 
 
@@ -126,32 +150,18 @@ const Dashboard = () => {
     Plotly.newPlot("soilChart", soilData, soilLayout);
   }, [tempYArray, humidYArray, lightYArray, soilYArray, selectedTempRange, selectedHumidRange, selectedLightRange, selectedSoilRange]);
 
-  const idGarden="20231211165037135375"
   const  handleTempDropdownChange = async (event) => {
-    setSelectedTempRange(event.target.value);
-    const data=await getDataGarden(idGarden,"Temperature",event.target.value,token);
-    setTempXData(data.keys)
-    setTempYArray(data.values)
+    setGraph("Temperature",event.target.value)
   };
 
   const handleHumidDropdownChange = async (event) => {
-    setSelectedHumidRange(event.target.value);
-    console.log(event)
-    const data=await getDataGarden(idGarden,"Humidity",event.target.value,token);
-    setHumidXData(data.keys)
-    setHumidYArray(data.values)
+    setGraph("Humidity",event.target.value)
   };
   const handleLightDropdownChange = async (event) => {
-    setSelectedLightRange(event.target.value);
-    const data=await getDataGarden(idGarden,"Light",event.target.value,token);
-    setLightXData(data.keys)
-    setLightYArray(data.values)
+    setGraph("Light",event.target.value)
   };
   const handleSoilDropdownChange = async (event) => {
-    setSelectedSoilRange(event.target.value);
-    const data=await getDataGarden(idGarden,"Moisture",event.target.value,token);
-    setSoilXData(data.keys)
-    setSoilYArray(data.values)
+    setGraph("Moisture",event.target.value)
   }
 
 // Thêm vườn
@@ -263,7 +273,7 @@ const saveData = async () => {
         {/* Chọn vườn */}
         <styles.Gardennamecontainer>
                 <select
-                  value={selectedGarden}
+                  value={selectedGardenId}
                   onChange={handleGardenChange}
                   style={{
                     padding: '11px',
@@ -274,10 +284,10 @@ const saveData = async () => {
                     borderRadius: '5px',
                     fontWeight: 'bold',
                   }}
-                >
-                  {gardenOptions.map((garden, index) => (
-                    <option key={index} value={garden}>
-                      {garden}
+                > if (gardensData.length!=0)
+                  {gardensData.map((garden, index) => (
+                    <option key={index} value={garden.gardenId}>
+                      {`Vườn ${garden.gardenname}`}
                     </option>
                   ))} 
                 </select>
