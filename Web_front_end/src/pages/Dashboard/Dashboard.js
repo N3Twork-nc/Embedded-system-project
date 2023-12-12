@@ -3,7 +3,7 @@ import * as styles from './styleDashboard';
 import Plotly from 'plotly.js-dist';
 import { fonts } from '../../global.js'
 import { format } from 'date-fns';
-import { myGarden, getDetailGardens } from '../../api/garden.js'
+import { myGarden, getDetailGardens } from '../../api/garden.js';
 import { Link,useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { getDataGarden } from '../../api/garden.js';
