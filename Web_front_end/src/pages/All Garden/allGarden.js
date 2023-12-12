@@ -133,7 +133,10 @@ const [modalEditVisible, setModalEditVisible] = useState(false);
     <styles.DashboardRoot>
     {/* Header */}
       <styles.Webheadercontainer>
-          <styles.Dashboard2 style={{cursor: 'default'}}>All garden</styles.Dashboard2>
+          <styles.Dashboard2 style={{cursor: 'default'}}>Tất cả khu vườn</styles.Dashboard2>
+          <styles.CountGarden>
+              <styles.CountText>Tổng số vườn: 20 </styles.CountText>
+          </styles.CountGarden>
           <styles.AddgardenContainer>
             <styles.Addgardenitems>
               <styles.Icongarden alt="" src="/icongarden.svg" />
