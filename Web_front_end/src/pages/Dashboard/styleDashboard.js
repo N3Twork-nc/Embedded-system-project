@@ -1195,23 +1195,20 @@ export const SoilGraph = styled.div`
 `;
 
 export const ID = styled.div`
-  position: absolute;
-  width: 70%;
-  top: 24.53%;
-  left: 5%;
-  display: inline-block;
+  position: relative;
   font-family: var(--font-roboto);
   font-size: 20px;
-  color: var(--color-darkgreen-100);
+  color: '#fff';
   font-weight: 500;
+  align-self: center;
+  color: var(--color-darkgreen);
+  justify-content: center;
 `;
 export const IDcontainer = styled.div`
   position: absolute;
-  height: 71.62%;
-  width: 29%;
-  top: 13.51%;
-  bottom: 14.86%;
-  left: 43%;
   background-color: var(--white);
+  bottom: 14.86%;
+  margin-left: 50%;
   border-radius: 13px; 
+  padding: 15px;
 `;
