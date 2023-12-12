@@ -2,14 +2,17 @@ import React, {useState, useEffect } from 'react';
 import * as styles from './styleAllGarden.js';
 import { fonts } from '../../global.js';
 import { Link,useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { myGarden, getDetailGardens } from '../../api/garden.js'
+import { useSelector, useDispatch } from 'react-redux';
+import { myGarden, getDetailGardens, deleteGarden } from '../../api/garden.js'
+import { updateMyGarden } from '../../reducers/mygarden.js'
+
 
 const AllGarden = () => {
   const infoUser=useSelector(state=>state.infoUser);
   const Authentication=JSON.parse(useSelector(state=>state.auth))
   const isLoggedIn=Authentication.isLoggedIn
   const token=Authentication.token
+  const dispatch=useDispatch()
   const [gardensData, setgardensData] = useState([]);
 
   useEffect(() => {  
@@ -100,6 +103,30 @@ const [modalEditVisible, setModalEditVisible] = useState(false);
     };
   };
 
+  const [deleteGardenId,setDeleteGardenId]=useState(null)
+
+  // Hàm xác nhận xóa vườn
+  const handleConfirmDelete = async (gardenId) => {
+    if (window.confirm('Bạn có chắc chắn muốn xóa vườn này?')) {
+      try {
+        const result = await deleteGarden(gardenId, token);
+        if (result) {
+          const gardenDetails = await getDetailGardens(token);
+          setgardensData(gardenDetails);
+          const action = updateMyGarden(gardenDetails);
+          dispatch(action);
+          alert('Xóa vườn thành công');
+        } else {
+          alert('Xóa vườn thất bại');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('Đã xảy ra lỗi khi xóa vườn');
+      }
+    }
+  };
+
+
 
  
   return (
@@ -172,9 +199,12 @@ const [modalEditVisible, setModalEditVisible] = useState(false);
             <styles.GardenName>Vườn {garden.gardenname}</styles.GardenName>
             <styles.GardenImageContainer alt="" src="/placeholder.jpg" style={resizeTo(100,100)} />
             <styles.ButtonOptionContainer>
-              <styles.ButtonOptionDelete alt="Delete" src="/bin.png" />
+            <styles.ButtonOptionDelete
+              alt="Delete"
+              src="/bin.png"
+              onClick={() => handleConfirmDelete(garden.gardenId)}
+            />
               <styles.ButtonOptionInfo onClick={showModalInfoGarden} alt="Edit" src="/info1.png" />
-                               
             </styles.ButtonOptionContainer>
             {modalInfoVisible && (
                   <div className="modal-info" 
