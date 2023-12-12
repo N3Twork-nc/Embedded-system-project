@@ -7,9 +7,9 @@ export const getDataGarden = async (idGraden,type,interval,token) => {
       Authorization: `Bearer ${token}`
     }
   });
-  JSON.parse(response.data)
-  keys=[]
-  values=[]
+  const data=response.data["Data"]
+  var keys=[]
+  var values=[]
   for (var key in data) {
     if (data.hasOwnProperty(key)) {
       keys.push(key)
